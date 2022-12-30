@@ -3,6 +3,7 @@ import { StyleSheet, Text, View,Image } from 'react-native';
 
 
 const RestaurantItem = ({restaurant})=>{
+  
     return (
       <View style={styles.restaurantContainer}>
              <Image source={{uri:restaurant.image,}} style={styles.image}/>
@@ -15,8 +16,7 @@ const RestaurantItem = ({restaurant})=>{
   export default RestaurantItem
   const styles = StyleSheet.create({
     restaurantContainer:{
-      width:"100%",
-      padding: 10
+      padding: 8
     },
     image:{
       width:"100%",
