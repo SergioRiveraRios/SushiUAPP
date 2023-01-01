@@ -3,6 +3,7 @@ import { StyleSheet, Text, View,Image } from 'react-native';
 
 
 const RestaurantItem = ({restaurant})=>{
+  
     return (
       <View style={styles.restaurantContainer}>
              <Image source={{uri:restaurant.image,}} style={styles.image}/>
