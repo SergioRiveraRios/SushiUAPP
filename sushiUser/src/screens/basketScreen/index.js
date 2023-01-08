@@ -20,7 +20,7 @@ const BasketScreen = ()=>{
 
             <Text style={styles.descrpition}>{dish.description}</Text>
 
-            <FlatList data={restarurant.dishes} renderItem={({item})  => <BasketSushiItem basketSushi={item} />} />
+            <FlatList data={restarurant.dishes} renderItem={({item})  => <BasketDishItem basketSushi={item} />} />
 
 
             <View style={styles.separator}/>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     },
     separator:{
         height:1,
-        backgroundColor:"lightgrey",
+        backgroundColor:"#DCDCDC",
         marginVertical:10
     },
     row:{

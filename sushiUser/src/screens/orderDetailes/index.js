@@ -1,4 +1,4 @@
-import {  } from "module";
+
 import { View,Text,StyleSheet,Image, FlatList } from "react-native";
 
 import orders from '../../../assets/data/orders.json'
@@ -40,18 +40,14 @@ const OrderDetails =()=>{
 export default OrderDetails
 
 const styles = StyleSheet.create({
-    restaurantContainer:{
-      width:"100%",
-      marginVertical:10
-    },
+    
     image:{
       width:"100%",
-      aspectRatio: 5/3,
+      
       marginBottom:5
     },
     Title:{
       fontSize:20,
-      fontFamily: "bold",
       marginVertical:5
     },
     subTitle:{
@@ -64,7 +60,7 @@ const styles = StyleSheet.create({
     },
     rating:{
       marginLeft:"auto",
-      backgroundColor:"Lighgray",
+      backgroundColor:"#DCDCDC",
       width:25,
       height:25,
       alignItems:"center",

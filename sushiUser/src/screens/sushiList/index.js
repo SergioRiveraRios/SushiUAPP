@@ -2,6 +2,9 @@ import { View,Text, StyleSheet, Image } from "react-native"
 import { AntDesign } from '@expo/vector-icons'; 
 //Import restaurants change for sushis
 import restaurants from '../../../assets/data/restaurants.json'
+
+//Import dishes change for sushi Ingredients 
+import SushiListItem from "../../components/sushiListItem";
 const restaurant =restaurants[0]
 
 const sushiList= () =>{
@@ -9,10 +12,11 @@ const sushiList= () =>{
         <View style={styles.page}>
             <Image source={{uri:restaurant.image}} style={styles.image}/>
             <View style={styles.iconContainer}>
-            <AntDesign name="leftcircleo" size={30} color="white" />
+                <AntDesign name="leftcircleo" size={30} color="white" />
             </View>
-            <Text style={styles.title} >{restaurant.name}</Text>
-            <Text style={styles.subtitle}> ${restaurant.deliveryFee}</Text>
+                <Text style={styles.title} >{restaurant.name}</Text>
+                <Text style={styles.subtitle}> ${restaurant.deliveryFee}</Text>
+                <SushiListItem dish={restaurant.dishes[0]}/>
         </View>
     )
 }
@@ -31,7 +35,8 @@ const styles = StyleSheet.create({
     },
     image:{
         width:"100%",
-        aspectRatio:5/4
+        aspectRatio:7/4,
+        paddingHorizontal:5
     },
     title:{
         fontSize:35,

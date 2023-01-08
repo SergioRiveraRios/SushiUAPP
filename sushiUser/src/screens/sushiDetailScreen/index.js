@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     },
     separator:{
         height:1,
-        backgroundColor:"lightgrey",
+        backgroundColor:"#DCDCDC",
         marginVertical:10
     },
     iconContainer:{
