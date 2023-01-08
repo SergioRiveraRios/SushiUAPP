@@ -4,7 +4,7 @@ import RestaurantItem from '../../../src/components/RestaurantItem/index'
 import restaurants from '../../../assets/data/restaurants.json'
 
 
-export default function HomeScreen() {
+const HomeScreen=()=> {
   return (
     <View style={styles.page}>
       <FlatList 
@@ -16,6 +16,8 @@ export default function HomeScreen() {
       
   );
 }
+export default HomeScreen
+
 
 const styles = StyleSheet.create({
   page: {
