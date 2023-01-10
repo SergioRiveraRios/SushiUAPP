@@ -1,27 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,FlatList } from 'react-native';
 
-//import restaurant(Sushi)
-import RestaurantItem from './src/components/RestaurantItem';
-
-
-import HomeScreen from './src/screens/HomeScreen';
-
-//Import restaurantDetail (SushiDetail)
-import SushiList from  './src/screens/sushiList'
-
+import {NavigationContainer} from '@react-navigation/native'
+import RootNavigator from './src/navigation';
 export default function App() {
   return (
-    <View style={styles.container}>
-      <SushiList />
-      <StatusBar style="light" />
-    </View>
+    <NavigationContainer>
+        <RootNavigator/>
+        <StatusBar style="light" />
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent:"center"
   },
 });
