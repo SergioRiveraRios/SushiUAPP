@@ -2,18 +2,23 @@ import {View,Text,StyleSheet} from 'react-native'
 import restarurants from '.././../../assets/data/restaurants.json'
 import { AntDesign } from '@expo/vector-icons'; 
 import { useState } from 'react';
+import { useRoute } from '@react-navigation/native';
 
-const dish = restarurants[0].dishes[0]
+const dish = restarurants.dishes
 
 const SushiDetailScreen = ()=>{
+    const route = useRoute()
+    const id=route.params?.id
+    
     const [quantity,setQuantity]= useState(1)
     const onMinus =() =>{if(quantity>1){setQuantity(quantity-1)}}
     const onPlus =() =>{setQuantity(quantity+1)}
-    const getTotal=()=>{return (dish.price * quantity).toFixed(2)}
+    const getTotal=()=>{return (id.price * quantity).toFixed(2)}
+
     return(
         <View style={styles.page}>
-            <Text style={styles.title}>{dish.name}</Text>
-            <Text style={styles.descrpition}>{dish.description}</Text>
+            <Text style={styles.title}>{id.name}</Text>
+            <Text style={styles.descrpition}>{id.description}</Text>
             <View style={styles.separator}/>
 
             <View style={styles.iconContainer}>
