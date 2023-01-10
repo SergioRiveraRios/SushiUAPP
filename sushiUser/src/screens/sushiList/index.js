@@ -1,23 +1,41 @@
-import { View,Text, StyleSheet, Image } from "react-native"
+import { View,Text, StyleSheet, Image,Pressable,FlatList } from "react-native"
 import { AntDesign } from '@expo/vector-icons'; 
+
+import { useNavigation } from "@react-navigation/native";
+
+import { useRoute } from '@react-navigation/native';
 //Import restaurants change for sushis
 import restaurants from '../../../assets/data/restaurants.json'
 
 //Import dishes change for sushi Ingredients 
 import SushiListItem from "../../components/sushiListItem";
-const restaurant =restaurants[0]
+import SushiDetailScreen from "../sushiDetailScreen";
+import SushiList from "./sushiList";
+
+
+
 
 const sushiList= () =>{
+    const route = useRoute()
+    const id=route.params?.id
+    
+    const navigation=useNavigation()
+    const onPress=()=>{
+        
+        navigation.navigate("SushiDetailScreen",{id:id.dishes})
+    }
+
     return(
-        <View style={styles.page}>
-            <Image source={{uri:restaurant.image}} style={styles.image}/>
+        <Pressable style={styles.page} onPress={onPress}>
+            <Image source={{uri:id.image}} style={styles.image}/>
             <View style={styles.iconContainer}>
                 <AntDesign name="leftcircleo" size={30} color="white" />
             </View>
-                <Text style={styles.title} >{restaurant.name}</Text>
-                <Text style={styles.subtitle}> ${restaurant.deliveryFee}</Text>
-                <SushiListItem dish={restaurant.dishes[0]}/>
-        </View>
+                <Text style={styles.title} >{id.name}</Text>
+                <Text style={styles.subtitle}> ${id.deliveryFee}</Text>
+                <FlatList data={id.dishes} renderItem={({item})=> <SushiList sushi={item} />} />
+                
+        </Pressable>
     )
 }
 
