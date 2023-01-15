@@ -1,9 +1,10 @@
-import {View,Text,StyleSheet, FlatList} from 'react-native'
+import {View,Text,StyleSheet, FlatList, Image} from 'react-native'
 import restarurants from '.././../../assets/data/restaurants.json'
 import BasketDishItem from '../../components/BasketDishItem'
 import { AntDesign } from '@expo/vector-icons'; 
 import { useState } from 'react';
 import { bool } from 'prop-types';
+import menu from '../../../assets/data/menu.json'
 
 const dish = restarurants[0].dishes[0]
 const restarurant= restarurants[0]
@@ -15,10 +16,8 @@ const BasketScreen = ()=>{
 
     return(
         <View style={styles.page}>
-            <AntDesign name="leftcircleo" size={30} color="black" />
             <Text style={styles.title}>Tu carrito</Text>
 
-            <Text style={styles.descrpition}>{dish.description}</Text>
 
             <FlatList data={restarurant.dishes} renderItem={({item})  => <BasketDishItem basketSushi={item} />} />
 

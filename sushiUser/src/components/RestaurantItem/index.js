@@ -2,27 +2,21 @@
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, View,Image,Pressable } from 'react-native';
 import {restaurants } from '../../../assets/data/restaurants.json'
-
-const RestaurantItem = ({restaurant})=>{
+import menu from '../../../assets/data/menu.json'
+const RestaurantItem = ({menu})=>{
   const navigation = useNavigation()
   const onPress=()=>{
-    navigation.navigate("SushiList",{id:restaurant})
+    navigation.navigate("SushiList",{id:menu})
   }
     return (
       
       <Pressable onPress={onPress}  style={styles.restaurantContainer}>
-             <Image source={{uri:restaurant.image,}} style={styles.image}/>
+             <Image source={{uri:menu.image,}} style={styles.image}/>
         <View style={styles.row}>
           <View>
-            <Text style={styles.Title}>{restaurant.name}</Text>
-            <Text style={styles.subTitle}>{restaurant.deliveryFee}</Text>
+            <Text style={styles.Title}>{menu.name}</Text>
+            <Text style={styles.subTitle}>Tiempo: {menu.minDeliveryTime}min - {menu.maxDeliveryTime}min</Text>
           </View>
-
-          <View style={styles.rating}>
-            <Text>{restaurant.rating}</Text>
-          </View>
-
-
         </View>
       </Pressable>
         
@@ -39,15 +33,16 @@ const RestaurantItem = ({restaurant})=>{
     image:{
       width:"100%",
       aspectRatio: 5/3,
-      marginBottom:5
+      marginBottom:5,
+      borderRadius:7
     },
     Title:{
-      fontSize:16,
+      fontSize:20,
       fontFamily: "bold",
       marginVertical:5
     },
     subTitle:{
-      fontSize:12,
+      fontSize:14,
       color:"grey"
     },
     row:{
