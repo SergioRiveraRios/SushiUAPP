@@ -8,10 +8,10 @@ import { useRoute } from '@react-navigation/native';
 import restaurants from '../../../assets/data/restaurants.json'
 
 //Import dishes change for sushi Ingredients 
-import SushiListItem from "../../components/sushiListItem";
+import SushiListItem from "../../components/SushiListItem";
 import SushiDetailScreen from "../sushiDetailScreen";
 import SushiList from "./sushiList";
-
+import HeaderSushiList from './header'
 
 
 
@@ -26,19 +26,12 @@ const sushiList= () =>{
     }
 
     return(
+        
         <Pressable style={styles.page} onPress={onPress}>
-            <Image source={{uri:id.image}} style={styles.image}/>
-            <View style={styles.iconContainer}>
-                <AntDesign name="leftcircleo" size={30} color="white" />
-            </View>
-                <Text style={styles.title} >{id.name}</Text>
-                <Text style={styles.subtitle}> ${id.deliveryFee}</Text>
-                <FlatList data={id.dishes} renderItem={({item})=> <SushiList sushi={item} />} />
-                
+                <FlatList ListHeaderComponent={HeaderSushiList} data={id.dishes} renderItem={({item})=> <SushiList sushi={item} />} />
         </Pressable>
     )
 }
-
 export default sushiList
 
 const styles = StyleSheet.create({

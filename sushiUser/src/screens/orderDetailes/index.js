@@ -5,7 +5,7 @@ import orders from '../../../assets/data/orders.json'
 
 import restarurants from '.././../../assets/data/restaurants.json'
 
-import SushiListItem from '../../components/sushiListItem/index'
+import SushiListItem from '../../components/SushiListItem/index'
 
 import BasketDishItem from '../../components/BasketDishItem'
 const order =orders[0]

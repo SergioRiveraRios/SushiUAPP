@@ -2,14 +2,15 @@
 import { StyleSheet,FlatList, View } from 'react-native';
 import RestaurantItem from '../../../src/components/RestaurantItem/index'
 import restaurants from '../../../assets/data/restaurants.json'
+import menu from '../../../assets/data/menu.json'
 
 //Change Restaurant Item for Menu Items
 const HomeScreen=()=> {
   return (
     <View style={styles.page}>
       <FlatList 
-          data={restaurants} 
-          renderItem={ ({item})=> <RestaurantItem restaurant={item} />}
+          data={menu} 
+          renderItem={ ({item})=> <RestaurantItem menu={item} />}
           showsVerticalScrollIndicator={false}
       />
     </View>

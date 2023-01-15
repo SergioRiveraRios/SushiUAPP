@@ -6,62 +6,49 @@ import { useNavigation } from "@react-navigation/native";
 import restaurants from '../../../assets/data/restaurants.json'
 
 //Import dishes change for sushi Ingredients 
-import SushiListItem from "../../components/sushiListItem";
+import SushiListItem from "../../components/SushiListItem";
 import { useRoute } from "@react-navigation/native";
 const restaurant =restaurants[0]
 
 
 
-const sushiList= () =>{
+const HeaderSushiList= () =>{
     const route = useRoute()
     const id=route.params.id
     console.log(id)
 
     const navigation=useNavigation()
-    const onPress=()=>{
-        navigation.navigate("SushiDetailScreen",
-        {id:restaurant.id})
-    }
 
     return(
-        <View style={styles.page} onPress={onPress}>
-            <Image source={{uri:restaurant.image}} style={styles.image}/>
-            <View style={styles.iconContainer}>
-                <AntDesign name="leftcircleo" size={30} color="white" />
-            </View>
-            <Pressable>
-            <Text style={styles.title} >{restaurant.name}</Text>
-                <Text style={styles.subtitle}> ${restaurant.deliveryFee}</Text>
-                <SushiListItem dish={restaurant.dishes[0]}/>
-            </Pressable>
-                
+        <View style={styles.page}>
+            <Image source={{uri:id.image}} style={styles.image}/>
+            <Text style={styles.title} >{id.name}</Text>
+            <Text style={styles.subTitle}>Tiempo: {id.minDeliveryTime}min - {id.maxDeliveryTime}min</Text>
         </View>
     )
 }
 
-export default sushiList
+export default HeaderSushiList
 
 const styles = StyleSheet.create({
     page:{
-        flex:1
-    },
-    iconContainer:{
-        padding:20,
-        position:"absolute",
-        top:35,
-        left:10
+        flex:1,
+        padding:10
     },
     image:{
         width:"100%",
         aspectRatio:7/4,
-        paddingHorizontal:5
+        paddingHorizontal:5,
+        borderRadius:7
     },
     title:{
         fontSize:35,
-        fontWeight:"500"
+        fontWeight:"500",
+        paddingLeft:10
     },
-    subtitle:{
-        color:"gray",
-        fontSize:15
+    subTitle:{
+        fontSize:20,
+        fontWeight:"300",
+        paddingLeft:10
     }
 })
