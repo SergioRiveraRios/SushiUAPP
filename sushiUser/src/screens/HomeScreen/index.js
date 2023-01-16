@@ -22,7 +22,6 @@ export default HomeScreen
 
 const styles = StyleSheet.create({
   page: {
-    padding: 10,
-    
+    padding: 10
   },
 });

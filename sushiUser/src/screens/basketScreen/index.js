@@ -6,8 +6,8 @@ import { useState } from 'react';
 import { bool } from 'prop-types';
 import menu from '../../../assets/data/menu.json'
 
-const dish = restarurants[0].dishes[0]
-const restarurant = restarurants[0]
+const dish = menu[0].dishes[0]
+const restarurant = menu[1]
 
 
 const BasketScreen = () => {
@@ -21,13 +21,12 @@ const BasketScreen = () => {
 
             <FlatList data={restarurant.dishes} renderItem={({ item }) => <BasketDishItem basketSushi={item} />} />
             <View style={styles.total}>
-                <Text>adasd</Text>
             </View>
 
 
 
             <View style={styles.buttonContainer}>
-                <Text style={styles.buttonAdd}> Add {quantity} to basket (${getTotal()}) </Text>
+                <Text style={styles.buttonAdd}> Comprar elemento(s) - $1,215 </Text>
             </View>
         </View>
     )
@@ -39,13 +38,15 @@ const styles = StyleSheet.create({
     page: {
         flex: 1,
         width: "100%",
-        paddingVertical: 30,
-        paddingLeft: 15
+        paddingVertical: 30
     },
     title: {
-        paddingLeft: 15,
         fontSize: 30,
-        fontWeight: "500"
+        fontWeight: "600",
+        justifyContent:"center",
+        alignContent:"center",
+        textAlign:"center",
+        marginBottom:10
     },
     descrpition: {
         paddingLeft: 15,
