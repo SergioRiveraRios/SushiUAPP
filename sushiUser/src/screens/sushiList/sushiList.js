@@ -24,7 +24,7 @@ const SushiList = ({ sushi }) => {
                             <Text style={styles.descrpition} >{sushi.inside} </Text>
                             <Text style={styles.inside}>Por fuera: </Text>
                             <Text style={styles.descrpition } >{sushi.outside}</Text>
-                            <Text style={styles.price}>${sushi.price}</Text>
+                            <Text style={styles.price}>Precio: ${sushi.price}</Text>
                         </View>
                         {sushi.image && (<Image source={{ uri: sushi.image }} style={styles.image} />)}
                     </View>

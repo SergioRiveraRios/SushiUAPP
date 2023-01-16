@@ -1,49 +1,58 @@
 import { View, Text, StyleSheet, Image } from "react-native"
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons';
 
-
+import perfil from '../../../assets/data/perfil.json'
 import restarurants from '.././../../assets/data/restaurants.json'
 const restarurant = restarurants[0]
+const perfiles = perfil[0]
 const ProfileScreen = () => {
     return (
-        <View>
+        <View style={styles.page}>
+            <Text style={styles.title}>Tu perfil</Text>
             <View style={styles.profileContainer}>
-                {restarurant.image && (<Image source={{ uri: restarurant.image }} style={styles.image} />)}
-                <Text>Sergio Rivera Rios</Text>
+                {perfiles.perfil && (<Image source={{ uri: perfiles.perfil }} style={styles.image} />)}
+                <Text style={styles.perfil}>Sergio Rivera Rios</Text>
             </View>
 
             <View style={styles.separator} />
             <View style={styles.row}>
-                
+
                 <View style={styles.tucarrito}>
-                    <Text>1</Text>
+                <MaterialCommunityIcons name="face-man-profile" size={50} color="black" />
                 </View>
-                <Text>{restarurant.name}</Text>
-                <Text style={styles.price}>{restarurant.rating}</Text>
+                <Text> Mi cuenta</Text>
             </View>
             <View style={styles.row}>
-                
+
                 <View style={styles.tucarrito}>
-                    <Text>1</Text>
+                <Entypo name="shopping-bag" size={50} color="black" />
                 </View>
-                <Text>{restarurant.name}</Text>
-                <Text style={styles.price}>{restarurant.rating}</Text>
+                <Text> Mis pedidos </Text>
             </View>
             <View style={styles.row}>
-                
+
                 <View style={styles.tucarrito}>
-                    <Text>1</Text>
+                <Entypo name="help" size={50} color="black" />
                 </View>
-                <Text>{restarurant.name}</Text>
-                <Text style={styles.price}>{restarurant.rating}</Text>
+                <Text> Ayuda </Text>
             </View>
             <View style={styles.separator} />
+
+            <View style={styles.buttonContainer}>
+                <Text style={styles.cerrar}> Cerrar sesion</Text>
+            </View>
         </View>
-        
+
     )
 }
 
 export default ProfileScreen
 const styles = StyleSheet.create({
+    page: {
+        width: "100%",
+        paddingVertical: 30,
+    },
     profileContainer: {
         flex: 1,
         alignItems: "center"
@@ -51,9 +60,9 @@ const styles = StyleSheet.create({
     image: {
         height: 150,
         aspectRatio: 1,
-        borderRadius: 7,
+        borderRadius: 50,
         paddingLeft: 5,
-        marginTop:20,
+        marginTop: 20,
         justifyContent: "center",
         alignContent: "center",
     },
@@ -65,7 +74,7 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: "row",
         alignItems: "center",
-        marginTop: 40,
+        marginTop: 30,
         paddingLeft: 15,
         paddingRight: 15
     },
@@ -78,10 +87,40 @@ const styles = StyleSheet.create({
         paddingRight: 5
     },
     tucarrito: {
-        backgroundColor: "grey",
         paddingHorizontal: 5,
-        paddingVertical: 2,
         marginRight: 10,
         borderRadius: 5
+    },
+    menuIcon: {
+        height: 50,
+        aspectRatio: 1,
+        borderRadius: 50,
+        paddingLeft: 5,
+        justifyContent: "center",
+        alignContent: "center",
+    },
+    title: {
+        fontSize: 30,
+        fontWeight: "600",
+        justifyContent: "center",
+        alignContent: "center",
+        textAlign: "center",
+        marginBottom: 10
+    },
+    perfil: {
+        marginTop: 10,
+        fontWeight: "400",
+        fontSize: 20
+    },
+    cerrar: {
+        color: "red",
+        fontWeight: "400",
+        fontSize:20
+    },
+    buttonContainer: {
+        padding: 20,
+        alignItems: "center",
+       
+        marginTop: "auto"
     },
 })
