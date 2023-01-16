@@ -36,7 +36,9 @@ const ProfileScreen = () => {
                 <Text>{restarurant.name}</Text>
                 <Text style={styles.price}>{restarurant.rating}</Text>
             </View>
+            <View style={styles.separator} />
         </View>
+        
     )
 }
 
@@ -51,6 +53,7 @@ const styles = StyleSheet.create({
         aspectRatio: 1,
         borderRadius: 7,
         paddingLeft: 5,
+        marginTop:20,
         justifyContent: "center",
         alignContent: "center",
     },
