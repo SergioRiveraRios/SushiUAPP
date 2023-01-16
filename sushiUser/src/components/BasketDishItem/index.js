@@ -1,11 +1,13 @@
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native'
 import restarurants from '.././../../assets/data/restaurants.json'
+import menu from '../../../assets/data/menu.json'
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
 import { bool } from 'prop-types';
 
-const dish = restarurants[0].dishes[0]
-const restarurant = restarurants[0]
+const dish = menu[0].dishes[0]
+const restarurant = menu[0]
+
 const BasketSushiItem = ({ basketSushi }) => {
     return (
         <View>
@@ -47,7 +49,8 @@ const styles = StyleSheet.create({
     },
     price: {
         marginLeft: "auto",
-        paddingRight: 5
+        paddingRight: 5,
+        fontWeight:"500"
     },
     tucarrito: {
         backgroundColor: "grey",
