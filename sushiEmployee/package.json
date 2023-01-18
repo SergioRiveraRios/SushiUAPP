@@ -1,0 +1,27 @@
+{
+  "name": "sushiemployee",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@react-navigation/bottom-tabs": "^6.5.3",
+    "@react-navigation/native": "^6.1.2",
+    "antd": "^5.1.5",
+    "expo": "~47.0.12",
+    "expo-screen-orientation": "~5.0.1",
+    "expo-status-bar": "~1.4.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-native": "^0.68.2",
+    "react-native-web": "^0.18.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9"
+  },
+  "private": true
+}

@@ -1,0 +1,464 @@
+[{
+    "id": "1",
+    "name": "Sushi",
+    "deliveryFee": 1.40,
+    "minDeliveryTime": 25,
+    "maxDeliveryTime": 45,
+    "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/rollosushi.jpg",
+    "dishes": [
+      {
+        "name": "Roll Camaron",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "",
+        "price": 130,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Roll Surimi",
+        "inside":"Pepino, zanahoria, queso philadelphia y surimi",
+        "outside": "",
+        "price": 130,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Nori Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Alga",
+        "price": 125,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Roll philadelphia",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Queso Philadelphia ",
+        "price": 135,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/philadelphia.PNG"
+      },
+      {
+        "name": "Mar y Tierra",
+        "inside":"Pepino, zanahoria, queso philadelphia, camaron y res",
+        "outside": "",
+        "price": 135,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Banana Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Platano frito ",
+        "price": 135,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/bananaroll.PNG"
+      },
+      {
+        "name": "Res Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia y res",
+        "outside": "",
+        "price": 130,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Roll Chipotle",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Aderezo Chipotle",
+        "price": 135,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/chipotleroll.PNG"
+      },
+      {
+        "name": " Chesse Roll",
+        "inside":"Por dentro: Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "",
+        "price": 135,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Tampico Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Tampico ",
+        "price": 135,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/tampicoroll.PNG"
+      },
+      {
+        "name": "Electric Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Salsa de anguila ",
+        "price": 130,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Roll Hawaii",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Pina, queso y un toque de chipotle",
+        "price": 130,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Camaron Especial",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Queso Philadelphia, camarones y salsa de anguila ",
+        "price": 130,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Apolo Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia,camaron, carne y surimi",
+        "outside": "Tampico y chipotle",
+        "price": 145,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Roll Especial",
+        "inside":"Pepino, zanahoria, queso philadelphia, camaron, carne y surimi",
+        "outside": "Queso Philadelphia, Tampico y un toque de chipotle",
+        "price": 150,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/especialroll.PNG"
+      },
+      {
+        "name": " Nori Especial",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Alga, Queso philadelphia, camaron y tampico",
+        "price": 150,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Dubai Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia, camaron, res, queso y surimi",
+        "outside": "",
+        "price": 150,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/dubairoll.PNG"
+      },
+      {
+        "name": "Volcancito Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Queso picosito fundido y un toque de anguila ",
+        "price": 140,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/volcancitoroll.PNG"
+      },
+      {
+        "name": "Cordon Blue",
+        "inside":"Pepino, zanahoria, queso philadelphia, pollo y tocino",
+        "outside": "Queso Fundido ",
+        "price": 150,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/cordonblueroll.PNG"
+      },
+      {
+        "name": "Avocado Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Aguacate y salsa anguila",
+        "price": 140,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/avocadoroll.PNG"
+      },
+      {
+        "name": "Venecia Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Tampico, Camaron empanizado, aguacato y un toque de anguila",
+        "price": 150,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/veneciaroll.PNG"
+      },
+      {
+        "name": "Roll Imperial",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Queso Philadelphia, pate de marlin, aguacate, camaron y siracha",
+        "price": 145,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/rollimperial.PNG"
+      },
+      {
+        "name": "Pink Maki",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Pate de marlin, aguacate, tampico y siracha",
+        "price": 145,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/pinkmaki.jpg"
+      },
+      {
+        "name": "Dinamita Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Pate de marlin, aguacate y siracha",
+        "price": 145,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Ibiza Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Camaron, platano dorado y un toque de siracha",
+        "price": 150,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "BBQ Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia y camaron",
+        "outside": "Salsa BBQ ",
+        "price": 135,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      }
+    ]
+  }, {
+    "id": "2",
+    "name": "Entradas",
+    "deliveryFee": 0.40,
+    "minDeliveryTime": 15,
+    "maxDeliveryTime": 25,
+    "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/papasentradas.jpg",
+    "dishes": [
+      {
+        "name": "Sashimi de Salmon",
+        "inside": "Cortes de salmon ba;ados en salsa de la casa y rodajas de chile serrano",
+        "outside":"",
+        "price": 180,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/sashimi.jpg"
+      },
+      {
+        "name": "Papa trufeada",
+        "inside": "250gr de papas a la francesa, sazonadas con especias y queso parmesano, acompanadas de un dip",
+        "outside":"",
+        "price": 75,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/papastrufeadas.jpg"
+      },
+      {
+        "name": "Elote amarillo",
+        "inside": "1 pieza de elote amarillo, aderezado con especias, tajin y queso parmesano",
+        "outside":"",
+        "price": 75,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Edamames",
+        "inside": "200gr de edamames tostados, banados en salsa picosita y tajin",
+        "outside":"",
+        "price": 75,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/edamames.jpg"
+      }
+    ]
+  }, {
+    "id": "3",
+    "name": "Rollos de especialidad",
+    "deliveryFee": 1.40,
+    "minDeliveryTime": 30,
+    "maxDeliveryTime": 45,
+    "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/rolloespecialidad.jpg",
+    "dishes": [
+      {
+        "name": "Krab Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia, camaron y aguacate",
+        "outside": " Cubierto de philadelphia y grenudo de kanikama, coronado con topping de cangrejo, aderezo y salsa de anguila ",
+        "price": 140,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/krab.jpg"
+      },
+      {
+        "name": "San Blas Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia, camaron y aguacate",
+        "outside": " Cubierto de platano frito, aguacate, topping de kanikama con masago y aderezo",
+        "price": 145,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Rock and Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia, camaron y aguacate",
+        "outside": "Cubierto de philadelphia, coronado con camarones roca picositos, aguacate y un toque de siracha ",
+        "price": 155,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/rock.jpg"
+      },
+      {
+        "name": "Masago Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia, camaron y aguacate",
+        "outside": "Cubierto de philadelphia, masago y bañado en salsa de anguila ",
+        "price": 130,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/masago.jpg"
+      },
+      {
+        "name": "Osaka Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia, camaron y aguacate",
+        "outside": "Queso gratinado, coronado con aguacate, masago y camarones empanizados, bañado en salsa de anguila, aderezo volcan y sriracha ",
+        "price": 155,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+      },
+      {
+        "name": "Salmoncito Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia, camaron y aguacate",
+        "outside": "Cubierto de salmon y un toque de aderezo volcan ",
+        "price": 145,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/salmoncito.jpg"
+      },
+      {
+        "name": "Alaska Roll",
+        "inside":"Pepino, zanahoria, queso philadelphia, camaron y aguacate",
+        "outside": "Cubierto de philadelphia y masago, coronado con topping de cangrejo, aguacate, camaron empanizado y salsa anguila ",
+        "price": 155,
+        "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/alaska.jpg"
+      }
+    ]
+  }, {
+    "id": "4",
+    "name": "Brochetas",
+    "deliveryFee": 0.90,
+    "minDeliveryTime": 25,
+    "maxDeliveryTime": 35,
+    "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/brochetas.PNG",
+    "dishes": [
+        {
+            "name": "Queso Philadelphia",
+            "inside":"",
+            "outside": " ",
+            "price": 130,
+            "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/brochetas2.jpg"
+        },
+        {
+          "name": "Camaron Queso - Camaron Phila",
+          "inside":"",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/brochetas3.PNG"
+        },
+        {
+          "name": "Platano Queso - platano Phila",
+          "inside":"",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/brochetas2.jpg"
+        },
+        {
+          "name": "Cangrejo Queso - Cangrejo Phila",
+          "inside":"",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/brochetas3.PNG"
+        }
+    ]
+  }, 
+  {
+    "id": "5",
+    "name": "Bolas de Fuego",
+    "deliveryFee": 0.90,
+    "minDeliveryTime": 30,
+    "maxDeliveryTime": 40,
+    "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/bolas.jpg",
+    "dishes": [
+        {
+            "name": "Una Bola",
+            "inside":"Queso Philadelphia (Camaron, Res, Surimi o Mar y tierra",
+            "outside": " ",
+            "price": 130,
+            "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+        },
+        {
+          "name": "Bolas Especiales",
+          "inside":"Queso Philadelphia (Camaron, Res, queso, tampico y tiras de surimi",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg"
+        },
+        {
+          "name": "Bolas Caribe",
+          "inside":"Platano Frito, camaron, queso, pina, tampico y aguacate",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/bolascaribe.jpg"
+        }
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Cocteles",
+    "deliveryFee": 0.90,
+    "minDeliveryTime": 20,
+    "maxDeliveryTime": 30,
+    "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/coctel.jpg",
+    "dishes": [
+        {
+            "name": "Clericot",
+            "inside":"Vino tinto, limon, jarabe, agua mineral, hielo, manzana y nuez picada",
+            "outside": " ",
+            "price": 130,
+            "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/clericot.PNG"
+        },
+        {
+          "name": "Ginger Frutos Rojos",
+          "inside":"Tanqueray, frutos rojos, hielo, agua tonica y ginger ale",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/ginger.PNG"
+        },
+        {
+          "name": "Ginger Maracuya",
+          "inside":"Tanqueray, maracuya, hielo, agua tronica, agua tonica y ginger ale",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/coctel.jpg"
+        },
+        {
+          "name": "Ginger Limon",
+          "inside":"Tanqueray, limon, jarabe, agua tonica y mineral",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/coctel.jpg"
+        },
+        {
+          "name": "Mojito Limon",
+          "inside":"Ron, Limon, Jarabe, hierbabuena, agua tonica y mineral",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/coctel.jpg"
+        },
+        {
+          "name": "Mojito Fresa",
+          "inside":"Ron, fresa, jarabae, hierbabuena, agua tonica y mineral",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/coctel.jpg"
+        },
+        {
+          "name": "Paloma",
+          "inside":"Tequila, toronja, agua mineral, limon y jarabe",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/coctel.jpg"
+        },
+        {
+          "name": "Baby Mango",
+          "inside":"Smirnoff de tamarindo, mango, tajin y chamoy",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/coctel.jpg"
+        },
+        {
+          "name": "Pina Colada",
+          "inside":"Bacardi, pina, crema de coco, hielo y leche clavel",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/coctel.jpg"
+        },
+        {
+          "name": "Michelada",
+          "inside":"Cerveza, salsas, clamato, limon, hielo, sal y tajin",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/coctel.jpg"
+        },
+        {
+          "name": "Cerveza espanola",
+          "inside":"Cerveza, vino tinto, limon, hielo y jarabe",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/coctel.jpg"
+        },
+        {
+          "name": "Baileys",
+          "inside":"Baileys, hielo y leche clavel",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/coctel.jpg"
+        },
+        {
+          "name": "Carajillo",
+          "inside":"Licor 43, cafe expreso y hielo",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/coctel.jpg"
+        },
+        {
+          "name": "Calpi Frutos Rojos",
+          "inside":"Whisky red label, calpico, agua mineral, hielo y frutos rojos",
+          "outside": " ",
+          "price": 130,
+          "image": "https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/coctel.jpg"
+        }
+    ]
+  }
+]
