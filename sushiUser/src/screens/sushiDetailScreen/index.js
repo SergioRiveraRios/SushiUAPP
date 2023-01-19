@@ -89,10 +89,12 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "600"
     },
-    image: {
-        aspectRatio: 5 / 6,
-        height: 200
-    },
+    image:{
+        width:"100%",
+        aspectRatio: 5/3,
+        marginBottom:5,
+        borderRadius:7
+      },
     inside: {
         color: "orange",
         fontWeight: "400"
