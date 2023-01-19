@@ -1,16 +1,16 @@
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import Orders from '../screens/Orders'
+import OrderDetails from '../screens/OrderDetails'
+const Stack= createNativeStackNavigator()
 
-
-const bottomTab=createMaterialBottomTabNavigator()
-
-const HomeTabs=()=>{
+const RootNavigator=()=>{
+    
     return(
-        <bottomTab.Navigator>
-            <bottomTab.Screen name='Inicio' component={HomeStackNavigator} options={{tabBarIcon:()=><AntDesign name="home" size={24} color="black" />}}/>
-            <bottomTab.Screen name='Carrito' component={BasketScreen} options={{tabBarIcon:()=><AntDesign name="shoppingcart" size={24} color="black" />}}/>
-            <bottomTab.Screen name='Perfil' component={ProfileScreen} options={{tabBarIcon:()=><AntDesign name="profile" size={24} color="black" />}}/>
-        </bottomTab.Navigator>
+        <Stack.Navigator  >
+            <Stack.Screen name="Home" component={Orders}/>
+            <Stack.Screen name="OrderDetails" component={OrderDetails}/>
+        </Stack.Navigator>
     )
 }
 
-export default HomeTabs
+export default RootNavigator
