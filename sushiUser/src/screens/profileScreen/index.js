@@ -50,26 +50,24 @@ const ProfileScreen = () => {
 export default ProfileScreen
 const styles = StyleSheet.create({
     page: {
+        flex:1, 
         width: "100%",
         paddingVertical: 30,
     },
     profileContainer: {
         flex: 1,
-        alignItems: "center"
+        alignItems: "center",
     },
-    image: {
-        height: 150,
-        aspectRatio: 1,
-        borderRadius: 50,
-        paddingLeft: 5,
-        marginTop: 20,
-        justifyContent: "center",
-        alignContent: "center",
-    },
+    image:{
+        height:150,
+        aspectRatio:1,
+        marginBottom:5,
+        borderRadius:50
+      },
     separator: {
         height: 1,
         backgroundColor: "#DCDCDC",
-        marginVertical: 8
+        marginTop:50
     },
     row: {
         flexDirection: "row",
