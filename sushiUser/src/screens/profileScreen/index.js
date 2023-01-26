@@ -5,11 +5,17 @@ import { Entypo } from '@expo/vector-icons';
 import perfil from '../../../assets/data/dashboard/perfil.json'
 import restarurants from '.././../../assets/data/restaurants.json'
 import {Auth} from 'aws-amplify'
+import { useNavigation } from '@react-navigation/native';
 const restarurant = restarurants[0]
 const perfiles = perfil[0]
 const ProfileScreen = () => {
+    const navigation = useNavigation()
     const SignOut=()=>{
          Auth.signOut()
+    }
+    
+    const AccountScreen=()=>{
+        navigation.navigate("Mi Cuenta")
     }
     return (
         <View style={styles.page}>
@@ -22,11 +28,12 @@ const ProfileScreen = () => {
             <View style={styles.separator} />
             <View style={styles.row}>
 
-                <View style={styles.tucarrito}>
-                <MaterialCommunityIcons name="face-man-profile" size={50} color="black" />
+                <View style={styles.tucarrito} >
+                <MaterialCommunityIcons name="face-man-profile" size={50} color="black" onPress={AccountScreen}/>
                 </View>
-                <Text> Mi cuenta</Text>
+                <Text onPress={AccountScreen}> Mi cuenta</Text>
             </View>
+
             <View style={styles.row}>
 
                 <View style={styles.tucarrito}>
