@@ -13,19 +13,19 @@ const SushiDetailScreen = () => {
     const [quantity, setQuantity] = useState(1)
     const onMinus = () => { if (quantity > 1) { setQuantity(quantity - 1) } }
     const onPlus = () => { setQuantity(quantity + 1) }
-    const getTotal = () => { return (id.price * quantity).toFixed(2) }
+    const getTotal = () => { return (id.Item_Precio * quantity).toFixed(2) }
 
     return (
         <View style={styles.page}>
-            <View>{id.image && (<Image source={{ uri: id.image }} style={styles.image} />)}</View>
+            <View>{id.Item_Imagen && (<Image source={{ uri: id.Item_Imagen }} style={styles.image} />)}</View>
             <View style={styles.row}>
-                <Text style={styles.title}>{id.name}</Text>
-                <Text style={styles.price}>${id.price}</Text>
+                <Text style={styles.title}>{id.Item_Nombre}</Text>
+                <Text style={styles.price}>${id.Item_Precio}</Text>
             </View>
             <Text style={styles.inside} numberOfLines={2}>Por Dentro:</Text>
-            <Text style={styles.descrpition} >{id.inside} </Text>
+            <Text style={styles.descrpition} >{id.Item_Dentro} </Text>
             <Text style={styles.inside}>Por fuera: </Text>
-            <Text style={styles.descrpition} >{id.outside}</Text>
+            <Text style={styles.descrpition} >{id.Item_Fuera}</Text>
 
             <View style={styles.separator} />
 
@@ -89,12 +89,12 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "600"
     },
-    image:{
-        width:"100%",
-        aspectRatio: 5/3,
-        marginBottom:5,
-        borderRadius:7
-      },
+    image: {
+        width: "100%",
+        aspectRatio: 5 / 3,
+        marginBottom: 5,
+        borderRadius: 7
+    },
     inside: {
         color: "orange",
         fontWeight: "400"
