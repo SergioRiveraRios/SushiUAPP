@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import restaurants from '../../../assets/data/restaurants.json'
 
 //Import dishes change for sushi Ingredients 
-import SushiListItem from "../../components/SushiListItem";
+import SushiListItem from "../../components/sushiListItem";
 import { useRoute } from "@react-navigation/native";
 const restaurant =restaurants[0]
 
@@ -14,16 +14,12 @@ const restaurant =restaurants[0]
 
 const HeaderSushiList= () =>{
     const route = useRoute()
-    const id=route.params.id
-    console.log(id)
-
-    const navigation=useNavigation()
-
+    const menucat=route.params?.menucat
     return(
         <View style={styles.page}>
-            <Image source={{uri:id.image}} style={styles.image}/>
-            <Text style={styles.title} >{id.name}</Text>
-            <Text style={styles.subTitle}>Tiempo: {id.minDeliveryTime}min - {id.maxDeliveryTime}min</Text>
+            <Image source={{uri:menucat.Categoria_Image}} style={styles.image}/>
+            <Text style={styles.title} >{menucat.Categoria}</Text>
+            
         </View>
     )
 }

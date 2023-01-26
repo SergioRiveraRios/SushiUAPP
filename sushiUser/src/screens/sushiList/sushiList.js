@@ -1,32 +1,36 @@
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native'
 import restarurants from '../../../assets/data/restaurants.json'
 import { AntDesign } from '@expo/vector-icons';
-import { useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { useNavigation } from "@react-navigation/native";
 
 
-const SushiList = ({ sushi }) => {
+import { useEffect, useState } from 'react';
+import { DataStore } from 'aws-amplify';
+
+const SushiList = ({ menuItem }) => {
     const navigation = useNavigation()
+    const route = useRoute()
+    const menuImagen =route.params?.menuid
     const onPrress = () => {
-        navigation.navigate("SushiDetailScreen", { id: sushi })
+        navigation.navigate("SushiDetailScreen", { id: menuItem })
     }
     return (
         <View style={styles.page}>
 
             <Pressable onPress={onPrress}>
 
-                <Text style={styles.title}>{sushi.name}</Text>
+                <Text style={styles.title}>{menuItem.Item_Nombre}</Text>
                 <View>
                     <View style={styles.insideContainer}>
                         <View style={{flex:1,width:"90%"}}>
                             <Text style={styles.inside} numberOfLines={2}>Por Dentro:</Text>
-                            <Text style={styles.descrpition} >{sushi.inside} </Text>
+                            <Text style={styles.descrpition} >{menuItem.Item_Dentro} </Text>
                             <Text style={styles.inside}>Por fuera: </Text>
-                            <Text style={styles.descrpition } >{sushi.outside}</Text>
-                            <Text style={styles.price}>Precio: ${sushi.price}</Text>
+                            <Text style={styles.descrpition } >{menuItem.Item_Fuera}</Text>
+                            <Text style={styles.price}>Precio: ${menuItem.price}</Text>
                         </View>
-                        {sushi.image && (<Image source={{ uri: sushi.image }} style={styles.image} />)}
+                        {menuItem.Item_Imagen && (<Image source={{ uri: menuItem.Item_Imagen }} style={styles.image} />)}
                     </View>
                 </View>
             </Pressable>
