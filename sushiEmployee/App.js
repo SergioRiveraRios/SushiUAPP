@@ -1,14 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import NewOrders from './src/screens/NewOrders';
-import "antd/dist/antd"
-
+import Orders from './src/screens/Orders';
+import {DrawerNavigator} from './src/navigation';
+import {NavigationContainer} from '@react-navigation/native'
 export default function App() {
   return (
-    <View style={styles.container}>
-      <NewOrders/>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+        <DrawerNavigator/>
+    </NavigationContainer>
+    //<View style={styles.container}>
+    //  <Orders/>
+    //  <StatusBar style="auto" />
+   // </View>
   );
 }
 
