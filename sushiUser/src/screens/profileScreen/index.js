@@ -2,11 +2,15 @@ import { View, Text, StyleSheet, Image } from "react-native"
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { Entypo } from '@expo/vector-icons';
 
-import perfil from '../../../assets/data/perfil.json'
+import perfil from '../../../assets/data/dashboard/perfil.json'
 import restarurants from '.././../../assets/data/restaurants.json'
+import {Auth} from 'aws-amplify'
 const restarurant = restarurants[0]
 const perfiles = perfil[0]
 const ProfileScreen = () => {
+    const SignOut=()=>{
+         Auth.signOut()
+    }
     return (
         <View style={styles.page}>
             <Text style={styles.title}>Tu perfil</Text>
@@ -39,8 +43,8 @@ const ProfileScreen = () => {
             </View>
             <View style={styles.separator} />
 
-            <View style={styles.buttonContainer}>
-                <Text style={styles.cerrar}> Cerrar sesion</Text>
+            <View style={styles.buttonContainer} >
+                <Text style={styles.cerrar} onPress={SignOut}> Cerrar sesion</Text>
             </View>
         </View>
 
