@@ -10,17 +10,17 @@ import SushiList from '../screens/sushiList'
 import ProfileScreen from '../screens/profileScreen';
 import AccountScreen from '../screens/AccountScreen'
 import { TabActions } from '@react-navigation/native'
-
+import { useAuthContext } from '../contexts/AuthContext';
 const Stack= createNativeStackNavigator()
 const homeStack=createNativeStackNavigator()
 const ProfileStack=createNativeStackNavigator()
 const bottomTab=createMaterialBottomTabNavigator()
 
 const  RootNavigator=()=>{
-    
+    const {dbUser}=useAuthContext()
     return(
         <Stack.Navigator screenOptions={{headerShown:false}} >
-            <Stack.Screen name="Home" component={HomeTabs}/>
+            {dbUser ? (<Stack.Screen name="Home" component={HomeTabs}/>):(<Stack.Screen name="AccountScreen" component={AccountScreen}/>)}
         </Stack.Navigator>
     )
 }

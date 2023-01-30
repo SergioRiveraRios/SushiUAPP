@@ -34,7 +34,7 @@ const BasketContextProvider = ({ children }) => {
 
         //let theBasket = basket || (await addDishToBasket(dish,quantity))
         console.log(basket, dish, quantity)
-        const nuevo = await DataStore.save(new OrdenCarrito({ Item_id: dish, Item_Cantidad: parseInt(quantity), carritoID: basket.id }))
+        DataStore.save(new OrdenCarrito({ Item_id: dish, Item_Cantidad: parseInt(quantity), carritoID: basket.id }))
         console.log(nuevo)
         console.log("listo")
 
