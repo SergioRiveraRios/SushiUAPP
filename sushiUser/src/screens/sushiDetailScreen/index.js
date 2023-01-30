@@ -3,18 +3,22 @@ import restarurants from '.././../../assets/data/restaurants.json'
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
 import { useRoute } from '@react-navigation/native';
-
-const dish = restarurants.dishes
-
+import { useBasketContext } from '../../contexts/BasketContext';
+import { useNavigation } from "@react-navigation/native";
 const SushiDetailScreen = () => {
     const route = useRoute()
-    const id = route.params?.id
-
+    const id = route.params?.menuItem
     const [quantity, setQuantity] = useState(1)
+    const { addtoBasketItem } = useBasketContext()
+    const navigation = useNavigation()
     const onMinus = () => { if (quantity > 1) { setQuantity(quantity - 1) } }
     const onPlus = () => { setQuantity(quantity + 1) }
     const getTotal = () => { return (id.Item_Precio * quantity).toFixed(2) }
-
+    
+    const addCarrito = async() => {
+        await addtoBasketItem(id.id ,parseInt(quantity))
+        //navigation.goBack()
+    }
     return (
         <View style={styles.page}>
             <View>{id.Item_Imagen && (<Image source={{ uri: id.Item_Imagen }} style={styles.image} />)}</View>
@@ -34,8 +38,8 @@ const SushiDetailScreen = () => {
                 <Text style={styles.quantity}>{quantity}</Text>
                 <AntDesign name="pluscircleo" size={24} color="black" onPress={onPlus} />
             </View>
-            <View style={styles.buttonContainer}>
-                <Text style={styles.buttonAdd}> Add {quantity} to basket (${getTotal()}) </Text>
+            <View style={styles.buttonContainer} onPress={addCarrito}>
+                <Text style={styles.buttonAdd} onPress={addCarrito}> Add {quantity} to basket (${getTotal()}) </Text>
             </View>
         </View>
     )

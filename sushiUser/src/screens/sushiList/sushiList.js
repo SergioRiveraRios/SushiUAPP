@@ -13,7 +13,7 @@ const SushiList = ({ menuItem }) => {
     const route = useRoute()
     const menuImagen =route.params?.menuid
     const onPrress = () => {
-        navigation.navigate("SushiDetailScreen", { id: menuItem })
+        navigation.navigate("SushiDetailScreen", { menuItem: menuItem })
     }
     return (
         <View style={styles.page}>
