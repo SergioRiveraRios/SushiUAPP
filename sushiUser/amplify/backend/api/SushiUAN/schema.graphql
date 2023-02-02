@@ -1,46 +1,19 @@
-type OrdenCarrito @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  Item_id: String
-  Item_Cantidad: Int
-  carritoID: ID! @index(name: "byCarrito")
-}
-
-type Carrito @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  usuarioID: ID! @index(name: "byUsuario")
-  OrdenCarritos: [OrdenCarrito] @hasMany(indexName: "byCarrito", fields: ["id"])
-}
-
 type Usuario @model @auth(rules: [{allow: public}]) {
   id: ID!
   Usuario_Nombre: String
-  Usuario_Telefono: Int
+  Usuario_Telefono: String
   Usuario_Correo: AWSEmail
+  untitledfield: String
   sub: String
-  Carritos: [Carrito] @hasMany(indexName: "byUsuario", fields: ["id"])
 }
 
-type ItemCategoria @model @auth(rules: [{allow: public}]) {
+type Categoria @model @auth(rules: [{allow: public}]) {
   id: ID!
   Categoria: String
-  Categoria_Image: AWSURL
-  menuitems: [MenuItem] @hasMany(indexName: "byItemCategoria", fields: ["id"])
-  Categoria_MinDelivery: String
-  Categoria_MaxDelivery: String
-}
-
-type OrdenTotal @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  Ordem_Fecha: AWSDate
-  Orden_Hora_Programada: AWSTime
-  Orden_Precio_Total: Int
-  Orden_Rating: Int
-  OrdenStatus: OrdenStatus @hasOne
-}
-
-type OrdenStatus @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  Orden_Valor: Int
+  Categoria_Imagen: AWSURL
+  Categoria_MinDelivery: Int
+  Categoria_MaxDelivery: Int
+  MenuItems: [MenuItem] @hasMany(indexName: "byCategoria", fields: ["id"])
 }
 
 type MenuItem @model @auth(rules: [{allow: public}]) {
@@ -50,7 +23,7 @@ type MenuItem @model @auth(rules: [{allow: public}]) {
   Item_Rating: Int
   Item_Dentro: String
   Item_Fuera: String
-  itemcategoriaID: ID! @index(name: "byItemCategoria")
   Item_Imagen: String
+  categoriaID: ID! @index(name: "byCategoria")
 }
  

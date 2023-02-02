@@ -1,4 +1,5 @@
-import { Auth, DataStore } from 'aws-amplify'
+import {  DataStore } from '@aws-amplify/datastore'
+import {Auth} from 'aws-amplify'
 import {createContext,useContext,useEffect,useState} from 'react'
 import { Usuario } from '../models'
 
@@ -7,17 +8,23 @@ const AuthContextProvider=({children})=>{
 
     const [authUser,setAuthUser]=useState(null)
     const [dbUser,setdbUser]=useState(null)
+    const [usuario,setUsuario]=useState([])
     const sub =authUser?.attributes?.sub
+
+    const fetchUser=async()=>{
+        const currentUser= await DataStore.query(Usuario)
+        setUsuario(currentUser)
+    }
     useEffect(()=>{
         Auth.currentAuthenticatedUser({bypassCache:true}).then(setAuthUser)
     },[])
-
-    useEffect(()=>{
-        DataStore.query(Usuario,user=>user.sub.eq(sub)).then((users)=>setdbUser(users[0]))
-    },[sub])
     
+    useEffect(()=>{
+        const subscrip= DataStore.observe(Usuario).subscribe(()=>fetchUser())
+        DataStore.query(Usuario,(user)=>user.sub.eq(sub)).then((users)=>setdbUser(users[0]))
+    },[authUser])
     return(
-        <AuthContext.Provider value={{authUser,dbUser,sub,setdbUser}}>
+        <AuthContext.Provider value={{authUser,dbUser,sub,setdbUser,usuario,setUsuario}}>
             {children}
         </AuthContext.Provider>
     )

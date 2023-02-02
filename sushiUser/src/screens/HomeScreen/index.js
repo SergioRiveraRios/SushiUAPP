@@ -1,24 +1,22 @@
-
-import { StyleSheet, FlatList, View, Text, Item } from 'react-native';
+import { StyleSheet, FlatList, View, Text, Item, Button } from 'react-native';
 import RestaurantItem from '../../../src/components/RestaurantItem/index'
 import { useEffect, useState } from 'react';
 import { DataStore } from 'aws-amplify';
-import { ItemCategoria } from '../../models';
+import { Categoria } from '../../models';
+
+import { createTable} from "../../components/databaseQuery";
 const HomeScreen = () => {
+
   const [menu, setMenu] = useState([])
- 
   useEffect(() => {
-    DataStore.query(ItemCategoria).then((results) => setMenu(results))
+    DataStore.query(Categoria).then((results) => setMenu(results))
   })
-  
+
   return (
-    <View style={styles.page}>
-      <FlatList 
-          data={menu} 
-          renderItem={ ({item,index})=> <RestaurantItem menu={item} index={index} />}
-          showsVerticalScrollIndicator={false}
-      />
-    </View>
+    <FlatList style={styles.page}
+      data={menu}
+      renderItem={({ item, index }) => <RestaurantItem menu={item} index={index} />}
+    />
 
   );
 }

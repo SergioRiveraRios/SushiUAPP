@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image } from "react-native"
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { Entypo } from '@expo/vector-icons';
-
+import { DataStore } from "@aws-amplify/datastore";
 import perfil from '../../../assets/data/dashboard/perfil.json'
 import restarurants from '.././../../assets/data/restaurants.json'
 import {Auth} from 'aws-amplify'
@@ -11,7 +11,9 @@ const perfiles = perfil[0]
 const ProfileScreen = () => {
     const navigation = useNavigation()
     const SignOut=()=>{
+        
          Auth.signOut()
+         DataStore.clear()
     }
     
     const AccountScreen=()=>{

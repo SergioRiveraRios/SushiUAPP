@@ -16,13 +16,14 @@ const RestaurantItem = ({menu,index})=>{
   const [brochetasList, brochetasMenu] = useState([])
   const [coctelesList, coctelesMenu] = useState([])
   useEffect(() => {
-    DataStore.query(MenuItem,c=>c.itemcategoriaID.eq("8d6c61bb-04f9-41d5-a4b0-7ddff00fdc02")).then((results) => sushiMenu(results))
-    DataStore.query(MenuItem,c=>c.itemcategoriaID.eq("57bf874e-417b-4de1-afaa-bc86fca3596c")).then((results) => especialidadMenu(results))
-    DataStore.query(MenuItem,c=>c.itemcategoriaID.eq("a2f0fdde-4258-4bf0-8b19-1da4946b93d9")).then((results) => brochetasMenu(results))
-    DataStore.query(MenuItem,c=>c.itemcategoriaID.eq("9c9fbbb3-7026-41d6-8548-77e0016ccda8")).then((results) => bolasMenu(results))
-    DataStore.query(MenuItem,c=>c.itemcategoriaID.eq("fb04672d-124b-4e86-a0f1-40d44deb812c")).then((results) => entradasMenu(results))
-    DataStore.query(MenuItem,c=>c.itemcategoriaID.eq("3e8c0f8a-f773-4c8c-a4f2-239684455c98")).then((results) => coctelesMenu(results))
+    DataStore.query(MenuItem,c=>c.categoriaID.eq("160ab474-d08d-4865-9c8d-79e1d080b429")).then((results) => sushiMenu(results))
+    DataStore.query(MenuItem,c=>c.categoriaID.eq("7f3270db-6c0d-416f-8ffb-7a48c3b21921")).then((results) => especialidadMenu(results))
+    DataStore.query(MenuItem,c=>c.categoriaID.eq("67230697-6b8d-4dd2-b7de-ac14055e0122")).then((results) => brochetasMenu(results))
+    DataStore.query(MenuItem,c=>c.categoriaID.eq("d018a94d-a359-41ec-9b2f-adf5e5ff344e")).then((results) => bolasMenu(results))
+    DataStore.query(MenuItem,c=>c.categoriaID.eq("d018a94d-a359-41ec-9b2f-adf5e5ff344e")).then((results) => entradasMenu(results))
+    DataStore.query(MenuItem,c=>c.categoriaID.eq("ce475b91-f3ec-4532-8c91-83ca5805f5d9")).then((results) => coctelesMenu(results))
   })
+  
   
   const onPress=()=>{
     switch(index){
@@ -50,7 +51,7 @@ const RestaurantItem = ({menu,index})=>{
     return (
       
       <Pressable onPress={onPress}  style={styles.restaurantContainer}>
-             <Image source={{uri:menu.Categoria_Image,}} style={styles.image}/>
+             <Image source={{uri:menu.Categoria_Imagen,}} style={styles.image}/>
         <View style={styles.row}>
           <View>
             <Text style={styles.Title}>{menu.Categoria}</Text>

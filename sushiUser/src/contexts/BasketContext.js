@@ -1,22 +1,20 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useState, useEffect, useContext } from "react";
+import {Alert} from 'react-native'
 import { DataStore } from "aws-amplify";
 import { useAuthContext } from './AuthContext';
-import { Carrito } from '../models'
-import { OrdenCarrito } from '../models';
-const BasketContext = createContext({})
+const BasketContext = createContext({});
 
 const BasketContextProvider = ({ children }) => {
     const { dbUser } = useAuthContext();
 
     const [basket, setBasket] = useState(null);
-    const [basketOrder, setbasketOrder] = useState(null)
+    const [basketDishes, setBasketDishes] = useState([]);
 
     useEffect(() => {
-        console.log(dbUser)
-        DataStore.query(Carrito, (c) => c.usuarioID.eq(dbUser.id)).then((baskets) => setBasket(baskets[0]))
-        DataStore.query(Carrito, (c) => c.usuarioID.eq(dbUser.id)).then((baskets) => console.log(baskets[0]))
-        const carritos=DataStore.query(OrdenCarrito)
-        console.log(carritos)
+        //DataStore.query(Carrito,(c)=>c.usuarioID.eq(dbUser.id)).then((result)=>setBasket(result[0]))
+
+        //DataStore.query(Carrito,(b)=>b.usuarioID("eq",dbUser.id)).then((carrito)=>setBasket(carrito[0]))
+       
     }, [dbUser])
 
     /*const addDishToBasket = async (dish, quantity) => {
@@ -28,21 +26,27 @@ const BasketContextProvider = ({ children }) => {
         
     }*/
 
-
-    const addtoBasketItem = async (dish, quantity) => {
-
-
-        //let theBasket = basket || (await addDishToBasket(dish,quantity))
-        console.log(basket, dish, quantity)
-        DataStore.save(new OrdenCarrito({ Item_id: dish, Item_Cantidad: parseInt(quantity), carritoID: basket.id }))
-        console.log(nuevo)
-        console.log("listo")
-
+    const  addtoBasketItem = async (dish, quantity) => {
+        try{
+            console.log("Carrito",basket)
+            
+            console.log(basket.id, dish.id, quantity)
+            const nuevo = DataStore.save(new OrdenCarrito({ MenuItem: dish, Item_Cantidad: quantity, carritoID: basket.id }))
+            console.log(nuevo)
+        }
+       
+        catch (e) { Alert.alert("error", e.message) }
     }
     return (
-        <BasketContext.Provider value={{ basket, setBasket, addtoBasketItem, setbasketOrder, basketOrder }}>
-            {children}
-        </BasketContext.Provider>
+        <BasketContext.Provider
+        value={{
+            addtoBasketItem,
+          basket,
+          basketDishes,setBasket,setBasketDishes
+        }}
+      >
+        {children}
+      </BasketContext.Provider>
     )
 }
 

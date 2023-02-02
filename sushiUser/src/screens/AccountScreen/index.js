@@ -1,46 +1,66 @@
 import { View, Text, StyleSheet, Image, TextInput, SafeAreaView, Button, Alert } from "react-native"
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from '@react-navigation/native';
-import { DataStore } from "aws-amplify";
+import { DataStore } from "@aws-amplify/datastore";
 import { Usuario } from '../../models'
-import { Carrito } from "../../models";
 import { useAuthContext } from '../../contexts/AuthContext'
-import { useBasketContext } from "../../contexts/BasketContext";
+
+import { db, createUser, readTable, updateUser, deleteUser, createCarrito, createTable,alterTable } from "../../components/databaseQuery";
+
+//import { useBasketContext } from "../../contexts/BasketContext";
 const AccountScreen = () => {
-    const { dbUser } = useAuthContext()
+    const dbconecction = db
+    const [Usuario_Nombre, onChangeNombre] = useState("");
+    const [Usuario_Telefono, onChangeTelefono] = useState("");
+    const [Usuario_Correo, onChangeCorreo] = useState("");
 
-    const [Usuario_Nombre, onChangeNombre] = useState(dbUser?.Usuario_Nombre || "");
-    const [Usuario_Telefono, onChangeTelefono] = useState(dbUser?.Usuario_Telefono + "" || "0");
-    const [Usuario_Correo, onChangeCorreo] = useState(dbUser?.Usuario_Correo || "");
-    const { sub, setdbUser } = useAuthContext()
-    const { addtoBasketItem, basket, setBasket } = useBasketContext()
+    /*const { dbUser } = useAuthContext()
+
+    
+
+    //const { addtoBasketItem, basket, setBasket } = useBasketContext()
+    const navigation = useNavigation()
+    
+    const { sub, setdbUser} = useAuthContext()*/
 
 
-    const onSave = async () => {
-        if (dbUser) {
-            console.log("1")
-            await updateUser();
-            console.log("3")
-        } else { await newUser(); }
-
+    const onRead = () => {
+        readTable()
     }
-    const updateUser = async () => {
-        const user  = await DataStore.save(Usuario.copyOf(dbUser, updated => {
+    const onSave = () => {
+        newUser()
+    };
+    const onUpdate = () => {
+        updateUser(Usuario_Telefono, Usuario_Nombre, Usuario_Correo, 2)
+    }
+    const onDelete = () => {
+        deleteUser(Usuario_Telefono)
+    }
+
+    /*const updateUser = async (id) => {
+            console.log("entre")
+            console.log("Original",original)
+            const original = await DataStore.query(Usuario,id)
+            console.log("Original",original)
+            const nuevo =  await DataStore.save(Usuario.copyOf(original, (updated) => {
                 updated.Usuario_Nombre = Usuario_Nombre;
-                updated.Usuario_Telefono = parseInt(Usuario_Telefono);
-                updated.Usuario_Correo = Usuario_Correo;
-                updated.sub=sub;
-            }));
-            console.log("2")
-            setdbUser(user)
-
-    }
-    const newUser = async () => {
+                updated.Usuario_Telefono = Usuario_Telefono;
+                updated.Usuario_Correo = Usuario_Correo
+            }))
+            console.log(nuevo)
+            setdbUser(nuevo)
+        console.log("2")
+    }*/
+    const newUser = () => {
         try {
-            const user = await DataStore.save(new Usuario({ Usuario_Nombre, Usuario_Telefono: parseInt(Usuario_Telefono), Usuario_Correo, sub }))
-            setdbUser(user)
-            const basket2 = await DataStore.save(new Carrito({ usuarioID: user.id }))
-            setBasket(basket2)
+            console.log("entre2")
+            createCarrito(Usuario_Telefono)
+            //const user = await DataStore.save(new Usuario({ Usuario_Nombre, Usuario_Telefono, Usuario_Correo, sub, untitledfield: 's' }))
+            //setdbUser(user)
+            //setUsuario(user)
+            //console.log("Usuario", user)
+            //const basket2 = await DataStore.save(new Carrito({ usuarioID: user.id }))
+            //setBasket(basket2)
         }
         catch (e) { Alert.alert("error", e.message) }
     }
@@ -75,6 +95,9 @@ const AccountScreen = () => {
                     />
                 </SafeAreaView>
                 <Button title="Guardar" onPress={onSave} />
+                <Button title="Leer" onPress={onRead} />
+                <Button title="Actualizar" onPress={onUpdate} />
+                <Button title="Eliminar" onPress={onDelete} />
             </View>
         </View>
     )
