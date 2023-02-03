@@ -14,12 +14,12 @@ const NewOrders = () => {
     navigation.navigate("OrderDetails")
   }
   return (
-    <FlatList 
+    /*<FlatList 
           data={menu} 
           renderItem={ ({item})=> <OrderList menu={item} />}
           showsVerticalScrollIndicator={false}
       />
-/*
+*/
     <Pressable onPress={OnPress} style={styles.restaurantContainer}>
       <Image source={{ uri: 'https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/default.jpg' }} style={styles.image} />
       <View style={styles.row}>
@@ -32,7 +32,7 @@ const NewOrders = () => {
         </View>
       </View>
     </Pressable>
-*/
+
   )
 }
 

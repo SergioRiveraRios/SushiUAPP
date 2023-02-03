@@ -13,7 +13,23 @@ const OrderDetails = () => {
 
     return (
         <View style={styles.page}>
+            <View >
+                <View style={styles.row}>
+                    <Text style={styles.Title}>Sergio Rivera</Text>
+                    <Text style={styles.subTitle}>#DF32343</Text>
+                </View>
+            </View>
+            <View style={styles.separator} />
             <FlatList data={menus.dishes} renderItem={({ item }) => <DetailedOrder basketSushi={item} />} />
+            <View style={styles.separator} />
+            <View>
+                <View style={styles.total}>
+                    <Text>asdasd</Text>
+                    <Text>asdasd</Text>
+                    <Text>asdasd</Text>
+                </View>
+            </View>
+            <View style={styles.separator} />
             <View style={styles.buttons}>
                 <View style={styles.buttonAccept}>
                     <Text style={styles.buttonAdd}> Aceptar Pedido </Text>
@@ -43,7 +59,16 @@ export default OrderDetails
 const styles = StyleSheet.create({
     page: {
         flex: 1,
-        paddingVertical: 30
+        paddingVertical: 10
+    },
+    row: {
+        marginLeft: 15,
+        flexDirection: "row",
+        justifyContent: "center"
+    },
+    total:{
+        marginLeft:"auto",
+        marginBottom:"auto"
     },
     restaurantContainer: {
         width: "100%",
@@ -60,7 +85,6 @@ const styles = StyleSheet.create({
     Title: {
         fontSize: 20,
         fontFamily: "bold",
-        marginVertical: 5
     },
     underTitle: {
         fontSize: 15,
@@ -68,15 +92,13 @@ const styles = StyleSheet.create({
     },
     subTitle: {
         fontSize: 15,
-        color: "grey"
+        color: "grey",
+        paddingTop: 4,
+        paddingLeft: 10
     },
     subTotal: {
         fontSize: 20,
         marginVertical: 15
-    },
-    row: {
-        alignItems: "center",
-        marginLeft: 15
     },
     rating: {
         marginLeft: "auto",
@@ -87,10 +109,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderRadius: 20
     },
-    buttons:{
-       flexDirection:'row',
-       padding:15,
-       marginHorizontal:5
+    buttons: {
+        flexDirection: 'row',
+        padding: 15,
+        marginHorizontal: 5
     },
     buttonAccept: {
         width: "50%",
@@ -112,5 +134,10 @@ const styles = StyleSheet.create({
     buttonAdd: {
         color: "white",
         fontWeight: "600"
+    },
+    separator: {
+        height: 1,
+        backgroundColor: "#DCDCDC",
+        marginVertical: 8,
     },
 })
