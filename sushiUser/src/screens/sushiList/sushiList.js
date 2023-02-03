@@ -20,7 +20,7 @@ const SushiList = ({ menuItem }) => {
 
             <Pressable onPress={onPrress}>
 
-                <Text style={styles.title}>{menuItem.Item_Nombre}</Text>
+                <Text style={styles.title}>{menuItem.menuItemNombre}</Text>
                 <View>
                     <View style={styles.insideContainer}>
                         <View style={{flex:1,width:"90%"}}>
@@ -28,9 +28,9 @@ const SushiList = ({ menuItem }) => {
                             <Text style={styles.descrpition} >{menuItem.Item_Dentro} </Text>
                             <Text style={styles.inside}>Por fuera: </Text>
                             <Text style={styles.descrpition } >{menuItem.Item_Fuera}</Text>
-                            <Text style={styles.price}>Precio: ${menuItem.Item_Precio}</Text>
+                            <Text style={styles.price}>Precio: ${menuItem.menuItemPrecio}</Text>
                         </View>
-                        {menuItem.Item_Imagen && (<Image source={{ uri: menuItem.Item_Imagen }} style={styles.image} />)}
+                        {menuItem.menuItemImagen && (<Image source={{ uri: menuItem.menuItemImagen }} style={styles.image} />)}
                     </View>
                 </View>
             </Pressable>

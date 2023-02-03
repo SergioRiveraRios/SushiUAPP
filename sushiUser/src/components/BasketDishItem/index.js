@@ -4,7 +4,6 @@ import menu from '../../../assets/data/menu.json'
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
 import { bool } from 'prop-types';
-
 const dish = menu[0].dishes[0]
 const restarurant = menu[0]
 
@@ -12,10 +11,13 @@ const BasketSushiItem = ({ basketSushi }) => {
     return (
         <View>
             <View style={styles.row}>
-                {basketSushi.image && (<Image source={{ uri: basketSushi.image }} style={styles.image} />)}
-                <Text style={styles.name}>{basketSushi.name}</Text>
-                <Text style={styles.price}>3x{basketSushi.price}</Text>
+            <Text style={styles.quantity}>{basketSushi.cantidadMenutItem}x</Text>
+                {basketSushi.menuItemImagen && (<Image source={{ uri: basketSushi.menuItemImagen }} style={styles.image} />)}
+                <Text style={styles.name}>{basketSushi.menuItemNombre}</Text>
+                <Text style={styles.price}>{basketSushi.menuItemPrecio}</Text>
+                
             </View>
+            
             <View style={styles.separator} />
 
             
@@ -44,13 +46,14 @@ const styles = StyleSheet.create({
         paddingRight: 15
     },
     quantity: {
-        fontSize: 25,
-        marginHorizontal: 20
+        fontSize: 20,
+        width:"12%"
     },
     price: {
-        marginLeft: "auto",
-        paddingRight: 5,
-        fontWeight:"500"
+        paddingLeft: 30,
+        fontSize:20,
+        fontWeight:"500",
+        marginLeft:"auto"
     },
     tucarrito: {
         backgroundColor: "grey",
@@ -60,13 +63,14 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     name: {
-        marginLeft: 20
+        marginLeft: 20,
+        width:"50%"
     },
     image: {
         height: 70,
         aspectRatio: 1,
         borderRadius: 7,
-        paddingLeft: 5,
+        paddingLeft: 10,
         justifyContent: "center",
         alignContent: "center",
     },

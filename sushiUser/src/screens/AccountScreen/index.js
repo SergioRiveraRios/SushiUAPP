@@ -5,7 +5,9 @@ import { DataStore } from "@aws-amplify/datastore";
 import { Usuario } from '../../models'
 import { useAuthContext } from '../../contexts/AuthContext'
 
-import { db, createUser, readTable, updateUser, deleteUser, createCarrito, createTable,alterTable } from "../../components/databaseQuery";
+import { useRoute } from '@react-navigation/native';
+
+import { db, createUser, readTable, updateUser, deleteUser, createCarrito, createTable, alterTable, createCategoria,createMenuItem, createOrdenCarrito } from "../../components/databaseQuery";
 
 //import { useBasketContext } from "../../contexts/BasketContext";
 const AccountScreen = () => {
@@ -13,7 +15,12 @@ const AccountScreen = () => {
     const [Usuario_Nombre, onChangeNombre] = useState("");
     const [Usuario_Telefono, onChangeTelefono] = useState("");
     const [Usuario_Correo, onChangeCorreo] = useState("");
+    const route = useRoute()
+    const user = route.params?.user
 
+    useEffect(()=>{
+        
+    })
     /*const { dbUser } = useAuthContext()
 
     
@@ -54,7 +61,8 @@ const AccountScreen = () => {
     const newUser = () => {
         try {
             console.log("entre2")
-            createCarrito(Usuario_Telefono)
+            createUser('sergio','sergiocorreo',2323,1)
+            //createCarrito(Usuario_Telefono)
             //const user = await DataStore.save(new Usuario({ Usuario_Nombre, Usuario_Telefono, Usuario_Correo, sub, untitledfield: 's' }))
             //setdbUser(user)
             //setUsuario(user)

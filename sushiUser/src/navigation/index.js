@@ -12,6 +12,7 @@ import AccountScreen from '../screens/AccountScreen'
 import { TabActions } from '@react-navigation/native'
 import { useAuthContext } from '../contexts/AuthContext';
 import { changeTitleushilistcreen } from '../components/RestaurantItem/index'
+import LoginScreen from '../screens/loginScreen'
 const Stack = createNativeStackNavigator()
 const homeStack = createNativeStackNavigator()
 const ProfileStack = createNativeStackNavigator()
@@ -20,7 +21,8 @@ const bottomTab = createMaterialBottomTabNavigator()
 const RootNavigator = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }} >
-            <Stack.Screen name="AccountScreen" component={AccountScreen}/>
+            <Stack.Screen name ='Login' component={LoginScreen}/>
+            <Stack.Screen name ='Home' component={HomeTabs } screenOptions={{ headerShown: false }}options={{headerShown:false}}/>
         </Stack.Navigator>
     )
 }
@@ -36,9 +38,9 @@ const HomeTabs = () => {
 const HomeStackNavigator = () => {
     return (
         <homeStack.Navigator  >
-            <homeStack.Screen name="Home" component={HomeScreen}></homeStack.Screen>
+            <homeStack.Screen name="Home" component={HomeScreen} screenOptions={{ headerBackButtonMenuEnabled: false }}options={{headerBackButtonMenuEnabled:false}}></homeStack.Screen>
             <homeStack.Screen name="OrderDetails" component={OrderDetails}></homeStack.Screen>
-            <homeStack.Screen name="SushiDetailScreen" component={SushiDetailScreen} ></homeStack.Screen>
+            <homeStack.Screen name="SushiDetailScreen" component={SushiDetailScreen} options={{headerTitle:"Platillo detalle"}} ></homeStack.Screen>
             <homeStack.Screen name="SushiList" component={SushiList} screenOptions={{ headerShown: false }} options={{
                 headerTitle: "Menu"
 
@@ -51,7 +53,7 @@ const ProfileStackNavigator = () => {
     return (
         <ProfileStack.Navigator>
             <ProfileStack.Screen name='Perfil' component={ProfileScreen}></ProfileStack.Screen>
-            <ProfileStack.Screen name='Mi Cuenta' component={AccountScreen}></ProfileStack.Screen>
+            
         </ProfileStack.Navigator>
     )
 }

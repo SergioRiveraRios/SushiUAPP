@@ -1,22 +1,25 @@
 import { View, Text, StyleSheet, Image } from "react-native"
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import { DataStore } from "@aws-amplify/datastore";
 import perfil from '../../../assets/data/dashboard/perfil.json'
-import restarurants from '.././../../assets/data/restaurants.json'
-import {Auth} from 'aws-amplify'
 import { useNavigation } from '@react-navigation/native';
-const restarurant = restarurants[0]
+import {useAuthContext} from '../../contexts/AuthContext'
+import { useEffect, useState } from "react";
+
 const perfiles = perfil[0]
 const ProfileScreen = () => {
+    const { setUsuario, user } = useAuthContext()
     const navigation = useNavigation()
-    const SignOut=()=>{
-        
-         Auth.signOut()
-         DataStore.clear()
+    const [currentUser,setCurrentUser]=useState(null)
+    useEffect(()=>{
+        setCurrentUser(user[0])
+    })
+    const SignOut = () => {
+        console.log("usuario",currentUser)
+        console.log("nombre",currentUser?.cliente_Nombre)
     }
-    
-    const AccountScreen=()=>{
+
+    const AccountScreen = () => {
         navigation.navigate("Mi Cuenta")
     }
     return (
@@ -24,14 +27,14 @@ const ProfileScreen = () => {
             <Text style={styles.title}>Tu perfil</Text>
             <View style={styles.profileContainer}>
                 {perfiles.perfil && (<Image source={{ uri: perfiles.perfil }} style={styles.image} />)}
-                <Text style={styles.perfil}>Sergio Rivera Rios</Text>
+                <Text style={styles.perfil}>{currentUser?.cliente_Nombre}</Text>
             </View>
 
             <View style={styles.separator} />
             <View style={styles.row}>
 
                 <View style={styles.tucarrito} >
-                <MaterialCommunityIcons name="face-man-profile" size={50} color="black" onPress={AccountScreen}/>
+                    <MaterialCommunityIcons name="face-man-profile" size={50} color="black" onPress={AccountScreen} />
                 </View>
                 <Text onPress={AccountScreen}> Mi cuenta</Text>
             </View>
@@ -39,14 +42,14 @@ const ProfileScreen = () => {
             <View style={styles.row}>
 
                 <View style={styles.tucarrito}>
-                <Entypo name="shopping-bag" size={50} color="black" />
+                    <Entypo name="shopping-bag" size={50} color="black" />
                 </View>
                 <Text> Mis pedidos </Text>
             </View>
             <View style={styles.row}>
 
                 <View style={styles.tucarrito}>
-                <Entypo name="help" size={50} color="black" />
+                    <Entypo name="help" size={50} color="black" />
                 </View>
                 <Text> Ayuda </Text>
             </View>
@@ -63,7 +66,7 @@ const ProfileScreen = () => {
 export default ProfileScreen
 const styles = StyleSheet.create({
     page: {
-        flex:1, 
+        flex: 1,
         width: "100%",
         paddingVertical: 30,
     },
@@ -71,16 +74,16 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
     },
-    image:{
-        height:150,
-        aspectRatio:1,
-        marginBottom:5,
-        borderRadius:50
-      },
+    image: {
+        height: 150,
+        aspectRatio: 1,
+        marginBottom: 5,
+        borderRadius: 50
+    },
     separator: {
         height: 1,
         backgroundColor: "#DCDCDC",
-        marginTop:50
+        marginTop: 50
     },
     row: {
         flexDirection: "row",
@@ -126,12 +129,12 @@ const styles = StyleSheet.create({
     cerrar: {
         color: "red",
         fontWeight: "400",
-        fontSize:20
+        fontSize: 20
     },
     buttonContainer: {
         padding: 20,
         alignItems: "center",
-       
+
         marginTop: "auto"
     },
 })

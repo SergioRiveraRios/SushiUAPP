@@ -1,30 +1,43 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
-import restarurants from '.././../../assets/data/restaurants.json'
 import { AntDesign } from '@expo/vector-icons';
-import { useState } from 'react';
+import {useEffect, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
-import { useBasketContext } from '../../contexts/BasketContext';
-import { useNavigation } from "@react-navigation/native";
+
+import {useAuthContext} from '../../contexts/AuthContext'
+import * as SQLite from 'expo-sqlite';
 const SushiDetailScreen = () => {
     const route = useRoute()
     const id = route.params?.menuItem
+    const { setUsuario, user } = useAuthContext()
+    const [currentUser,setCurrentUser]=useState(null)
     const [quantity, setQuantity] = useState(1)
-    const { addtoBasketItem } = useBasketContext()
-    const navigation = useNavigation()
     const onMinus = () => { if (quantity > 1) { setQuantity(quantity - 1) } }
     const onPlus = () => { setQuantity(quantity + 1) }
-    const getTotal = () => { return (id.Item_Precio * quantity).toFixed(2) }
+    const getTotal = () => { return (id.menuItemPrecio * quantity).toFixed(2) }
+    const db = SQLite.openDatabase('example.db')
+
+    useEffect(()=>{
+        setCurrentUser(user[0])
+    },[user])
+    const addCarrito=()=>{
+        createOrdenCarrito(currentUser?.cliente_Telefono,id.idMenuItem,quantity)
+    }
+    const createOrdenCarrito = (carritoID, menuItemId, cantidadMenuItem) => {
+        db.transaction(tx => {
+            tx.executeSql(`INSERT INTO ordenCarrito (idCarrito,idMenuItem,cantidadMenutItem) SELECT (select idCarrito FROM carrito where carrito.cliente_Telefono='${carritoID}') as idCarrito , '${menuItemId}', '${cantidadMenuItem}' `, null,
+                (txtObj, resulSet) => {
+                    console.log("CREADO")
+                }
+            )
+        })
     
-    const addCarrito = async() => {
-        await addtoBasketItem(id.id ,parseInt(quantity))
-        //navigation.goBack()
     }
     return (
         <View style={styles.page}>
-            <View>{id.Item_Imagen && (<Image source={{ uri: id.Item_Imagen }} style={styles.image} />)}</View>
+            <View>{id.menuItemImagen && (<Image source={{ uri: id.menuItemImagen }} style={styles.image} />)}</View>
             <View style={styles.row}>
-                <Text style={styles.title}>{id.Item_Nombre}</Text>
-                <Text style={styles.price}>${id.Item_Precio}</Text>
+                <Text style={styles.title}>{id.menuItemNombre}</Text>
+                <Text style={styles.price}>${id.menuItemPrecio}</Text>
             </View>
             <Text style={styles.inside} numberOfLines={2}>Por Dentro:</Text>
             <Text style={styles.descrpition} >{id.Item_Dentro} </Text>
@@ -63,7 +76,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 30,
-        fontWeight: "500"
+        fontWeight: "500",
+        width:"80%"
     },
     description: {
         color: "grey"

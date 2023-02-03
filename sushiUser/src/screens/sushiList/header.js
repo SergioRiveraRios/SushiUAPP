@@ -17,8 +17,8 @@ const HeaderSushiList = () => {
     const menucat = route.params?.menucat
     return (
         <View style={styles.page}>
-            <Image source={{ uri: menucat.Categoria_Imagen }} style={styles.image} />
-            <Text style={styles.title} >{menucat.Categoria}</Text>
+            <Image source={{ uri: menucat.categoriaImagen }} style={styles.image} />
+            <Text style={styles.title} >{menucat.categoriaNombre}</Text>
             <View>
                 <Text style={styles.subTitle}>Tiempo: {menucat.Categoria_MinDelivery}min - {menucat.Categoria_MaxDelivery}min</Text>
             </View>
