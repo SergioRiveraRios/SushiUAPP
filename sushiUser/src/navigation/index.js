@@ -53,7 +53,7 @@ const ProfileStackNavigator = () => {
     return (
         <ProfileStack.Navigator>
             <ProfileStack.Screen name='Perfil' component={ProfileScreen}></ProfileStack.Screen>
-            
+            <ProfileStack.Screen name='Account' component={AccountScreen}></ProfileStack.Screen>
         </ProfileStack.Navigator>
     )
 }

@@ -14,7 +14,7 @@ export const createTable = async () => {
         tx.executeSql(
             //'DROP TABLE menuItem'
             //'CREATE TABLE IF NOT EXISTS ordenCarrito (idOrdenCarrito INTEGER PRIMARY KEY AUTOINCREMENT, cantidadMenutItem INT, idCarrito INTEGER NOT NULL,idMenuItem INTEGER NOT NULL,  FOREIGN KEY (idCarrito) REFERENCES carrito (idCarrito), FOREIGN KEY (idMenuItem) REFERENCES menuItem(idMenuItem))'
-            'CREATE TABLE IF NOT EXISTS menuItem(idMenuItem INTEGER PRIMARY KEY AUTOINCREMENT, menuItemNombre TEXT, menuItemPrecio TEXT, menuItemRating INTEGER, menuItemImagen TEXT, idCategoria INTEGER NOT NULL, FOREIGN KEY(idCategoria) REFERENCES categoria(idCategoria))'
+            'CREATE TABLE IF NOT EXISTS menuItem(idMenuItem INTEGER PRIMARY KEY AUTOINCREMENT, menuItemNombre TEXT, menuItemPrecio TEXT, menuItemRating INTEGER, menuItemImagen TEXT,menuItemDentro TEXT ,menuItemFuera TEXT, idCategoria INTEGER NOT NULL, FOREIGN KEY(idCategoria) REFERENCES categoria(idCategoria))'
             //'CREATE TABLE IF NOT EXISTS categoria (idCategoria INTEGER PRIMARY KEY AUTOINCREMENT, categoriaNombre TEXT, categoriaImagen TEXT)'
             //'CREATE TABLE IF NOT EXISTS carrito (idCarrito INTEGER PRIMARY KEY AUTOINCREMENT, cliente_Telefono INTEGER NOT NULL, FOREIGN KEY (cliente_Telefono) REFERENCES usuario (cliente_Telefono))'
             //'CREATE TABLE IF NOT EXISTS usuario (cliente_Telefono INTEGER PRIMARY KEY , cliente_Nombre TEXT, cliente_correo TEXT, cliente_contrasena INT)'
@@ -123,12 +123,12 @@ export const createCategoria = (CategoriaNombre, CategoriaURL) => {
 
 }
 
-export const createMenuItem = (menuItemNombre, menuItemPrecio, menuItemRating, menuItemImagen,categoriaID) => {
+export const createMenuItem = (menuItemNombre, menuItemPrecio, menuItemRating, menuItemImagen,menuItemDentro,menuItemFuera,categoriaID) => {
     const db =  connectionState()
     console.log(db.ConnectionState)
 
     db.transaction(tx => {
-        tx.executeSql(`INSERT INTO menuitem (menuItemNombre, menuItemPrecio,menuItemRating,menuItemImagen,idCategoria) values('${menuItemNombre}','${menuItemPrecio}','${menuItemRating}','${menuItemImagen}','${categoriaID}')  `, null,
+        tx.executeSql(`INSERT INTO menuitem (menuItemNombre, menuItemPrecio,menuItemRating,menuItemImagen,menuItemDentro,menuItemFuera,idCategoria) values('${menuItemNombre}','${menuItemPrecio}','${menuItemRating}','${menuItemImagen}','${menuItemDentro}','${menuItemFuera}','${categoriaID}')  `, null,
             (txtObj, resulSet) => {
                 console.log("CREADO")
             }
@@ -165,7 +165,7 @@ export const readTable =  () => {
     let x = []
     db.transaction(tx => {
         // sending 4 arguments in executeSql
-        tx.executeSql('SELECT * FROM categoria ', [],
+        tx.executeSql('SELECT *  FROM usuario  ', [],
             (txObj, result) => {console.log(result.rows)
             },
             (txObj, error) => console.log('Error ', error)

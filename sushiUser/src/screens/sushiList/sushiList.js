@@ -25,9 +25,9 @@ const SushiList = ({ menuItem }) => {
                     <View style={styles.insideContainer}>
                         <View style={{flex:1,width:"90%"}}>
                             <Text style={styles.inside} numberOfLines={2}>Por Dentro:</Text>
-                            <Text style={styles.descrpition} >{menuItem.Item_Dentro} </Text>
+                            <Text style={styles.descrpition} >{menuItem.menuItemDentro} </Text>
                             <Text style={styles.inside}>Por fuera: </Text>
-                            <Text style={styles.descrpition } >{menuItem.Item_Fuera}</Text>
+                            <Text style={styles.descrpition } >{menuItem.menuItemFuera}</Text>
                             <Text style={styles.price}>Precio: ${menuItem.menuItemPrecio}</Text>
                         </View>
                         {menuItem.menuItemImagen && (<Image source={{ uri: menuItem.menuItemImagen }} style={styles.image} />)}

@@ -1,26 +1,28 @@
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, Alert } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
-import {useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
-
-import {useAuthContext} from '../../contexts/AuthContext'
+import { useAuthContext } from '../../contexts/AuthContext'
 import * as SQLite from 'expo-sqlite';
 const SushiDetailScreen = () => {
     const route = useRoute()
     const id = route.params?.menuItem
     const { setUsuario, user } = useAuthContext()
-    const [currentUser,setCurrentUser]=useState(null)
+    const [currentUser, setCurrentUser] = useState(null)
     const [quantity, setQuantity] = useState(1)
     const onMinus = () => { if (quantity > 1) { setQuantity(quantity - 1) } }
     const onPlus = () => { setQuantity(quantity + 1) }
     const getTotal = () => { return (id.menuItemPrecio * quantity).toFixed(2) }
     const db = SQLite.openDatabase('example.db')
-
-    useEffect(()=>{
+    const [modalVisible, setModalVisible] = useState(false);
+    useEffect(() => {
         setCurrentUser(user[0])
-    },[user])
-    const addCarrito=()=>{
-        createOrdenCarrito(currentUser?.cliente_Telefono,id.idMenuItem,quantity)
+    }, [user])
+    const addCarrito = () => {
+        Alert.alert('WOW!','Tu item ha sido agregado al carrito' , [
+            { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ]);
+        createOrdenCarrito(currentUser?.cliente_Telefono, id.idMenuItem, quantity)
     }
     const createOrdenCarrito = (carritoID, menuItemId, cantidadMenuItem) => {
         db.transaction(tx => {
@@ -30,9 +32,10 @@ const SushiDetailScreen = () => {
                 }
             )
         })
-    
+
     }
     return (
+
         <View style={styles.page}>
             <View>{id.menuItemImagen && (<Image source={{ uri: id.menuItemImagen }} style={styles.image} />)}</View>
             <View style={styles.row}>
@@ -40,9 +43,9 @@ const SushiDetailScreen = () => {
                 <Text style={styles.price}>${id.menuItemPrecio}</Text>
             </View>
             <Text style={styles.inside} numberOfLines={2}>Por Dentro:</Text>
-            <Text style={styles.descrpition} >{id.Item_Dentro} </Text>
+            <Text style={styles.descrpition} >{id.menuItemDentro} </Text>
             <Text style={styles.inside}>Por fuera: </Text>
-            <Text style={styles.descrpition} >{id.Item_Fuera}</Text>
+            <Text style={styles.descrpition} >{id.menuItemFuera}</Text>
 
             <View style={styles.separator} />
 
@@ -77,7 +80,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 30,
         fontWeight: "500",
-        width:"80%"
+        width: "80%"
     },
     description: {
         color: "grey"

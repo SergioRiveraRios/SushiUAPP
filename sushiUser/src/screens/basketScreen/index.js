@@ -1,8 +1,8 @@
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native'
+import { View, Text, StyleSheet, FlatList, Image,RefreshControl } from 'react-native'
 import restarurants from '.././../../assets/data/restaurants.json'
 import BasketDishItem from '../../components/BasketDishItem'
 import { AntDesign } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useCallback } from 'react';
 import { bool } from 'prop-types';
 import menu from '../../../assets/data/menu.json'
 import { useRoute } from '@react-navigation/native';
@@ -15,17 +15,24 @@ const BasketScreen = () => {
     const [quantity, setQuantity] = useState(1)
     const getTotal = () => { return (dish.price * quantity).toFixed(2) }
     const { setUsuario, user } = useAuthContext()
-    const [currentUser,setCurrentUser]=useState(null)
     const [currentBasket,setcurrentBasket]=useState(null)
-
+    const [refreshing, setRefreshing] = useState(false);
+    
+    const [currentUser,setCurrentUser]=useState(null)
     const db = SQLite.openDatabase('example.db')
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+          setRefreshing(false);
+        }, 1000);
+      }, []);
+    
     useEffect(()=>{
         setCurrentUser(user[0])
     },[user])
     useEffect(()=>{
         console.log(currentUser?.cliente_Telefono)
         getOrdenCarrito(currentUser?.cliente_Telefono)
-        
     },[currentUser])
     const getOrdenCarrito= async(Usuario_Telefono)=>{
         db.transaction(tx => {
@@ -62,7 +69,7 @@ const BasketScreen = () => {
         <View style={styles.page}>
             <Text style={styles.title}>Tu carrito</Text>
 
-            <FlatList data={currentBasket} renderItem={({ item }) => <BasketDishItem basketSushi={item} />} />
+            <FlatList data={currentBasket} renderItem={({ item }) => <BasketDishItem basketSushi={item} refreshing={refreshing} onRefresh={onRefresh}/>} />
 
             
             <View style={styles.total}>

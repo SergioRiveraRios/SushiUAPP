@@ -1,48 +1,43 @@
 import { View, Text, StyleSheet, Image, TextInput, SafeAreaView, Button, Alert } from "react-native"
 import React, { useEffect, useState } from "react";
-import { useNavigation } from '@react-navigation/native';
-import { DataStore } from "@aws-amplify/datastore";
-import { Usuario } from '../../models'
-import { useAuthContext } from '../../contexts/AuthContext'
+import {useAuthContext} from '../../contexts/AuthContext'
 
-import { useRoute } from '@react-navigation/native';
 
-import { db, createUser, readTable, updateUser, deleteUser, createCarrito, createTable, alterTable, createCategoria,createMenuItem, createOrdenCarrito } from "../../components/databaseQuery";
+import * as SQLite from 'expo-sqlite';
 
 //import { useBasketContext } from "../../contexts/BasketContext";
 const AccountScreen = () => {
-    const dbconecction = db
-    const [Usuario_Nombre, onChangeNombre] = useState("");
-    const [Usuario_Telefono, onChangeTelefono] = useState("");
-    const [Usuario_Correo, onChangeCorreo] = useState("");
-    const route = useRoute()
-    const user = route.params?.user
-
+    const db = SQLite.openDatabase('example.db')
+    const { setUsuario, user } = useAuthContext()
+    const [currentUser,setCurrentUser]=useState(null)
     useEffect(()=>{
+        setCurrentUser(user[0])
+    },[user])
+    const updateUser = (Usuario_Telefono, Usuario_Nombre, Usuario_Correo) => {
         
-    })
-    /*const { dbUser } = useAuthContext()
-
+        db.transaction(tx => {
+            tx.executeSql(`UPDATE usuario 
+                            SET cliente_Nombre='${Usuario_Nombre}', 
+                            cliente_correo ='${Usuario_Correo}',
+                            WHERE cliente_Telefono='${Usuario_Telefono}'`, null,
+                (txtObj, resulSet) => {
+                    console.log("actualizado")
+                }
+            )
+        })
     
-
-    //const { addtoBasketItem, basket, setBasket } = useBasketContext()
-    const navigation = useNavigation()
-    
-    const { sub, setdbUser} = useAuthContext()*/
-
+    }
+    const [Usuario_Nombre, onChangeNombre] = useState(currentUser?.cliente_Nombre+'');
+    const [Usuario_Telefono, onChangeTelefono] = useState(currentUser?.cliente_Telefono+'');
+    const [Usuario_Correo, onChangeCorreo] = useState(currentUser?.cliente_Correo+'' );
 
     const onRead = () => {
-        readTable()
+        console.log("usuario",currentUser)
+        console.log("nombre",currentUser?.cliente_Nombre)
     }
     const onSave = () => {
-        newUser()
+        updateUser(currentUser?.Usuario_Telefono, currentUser?.Usuario_Nombre,currentUser?.Usuario_Correo)
     };
-    const onUpdate = () => {
-        updateUser(Usuario_Telefono, Usuario_Nombre, Usuario_Correo, 2)
-    }
-    const onDelete = () => {
-        deleteUser(Usuario_Telefono)
-    }
 
     /*const updateUser = async (id) => {
             console.log("entre")
@@ -61,7 +56,6 @@ const AccountScreen = () => {
     const newUser = () => {
         try {
             console.log("entre2")
-            createUser('sergio','sergiocorreo',2323,1)
             //createCarrito(Usuario_Telefono)
             //const user = await DataStore.save(new Usuario({ Usuario_Nombre, Usuario_Telefono, Usuario_Correo, sub, untitledfield: 's' }))
             //setdbUser(user)
@@ -92,6 +86,8 @@ const AccountScreen = () => {
                     <Text style={styles.inputText}>Tu Telefono:</Text>
                     <TextInput
                         style={styles.input}
+                        keyboardType="numeric"
+                        editable={false}
                         onChangeText={onChangeTelefono}
                         value={Usuario_Telefono}
                     />
@@ -103,9 +99,7 @@ const AccountScreen = () => {
                     />
                 </SafeAreaView>
                 <Button title="Guardar" onPress={onSave} />
-                <Button title="Leer" onPress={onRead} />
-                <Button title="Actualizar" onPress={onUpdate} />
-                <Button title="Eliminar" onPress={onDelete} />
+                <Button title="Eliminar Cuenta" onPress={onRead} style={styles.eliminarCuenta}/>
             </View>
         </View>
     )
@@ -162,5 +156,8 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 12,
         fontSize: 15,
+    },
+    eliminarCuenta:{
+        backgroundColor:"red"
     }
 })

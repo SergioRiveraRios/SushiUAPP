@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet, Image } from "react-native"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import perfil from '../../../assets/data/dashboard/perfil.json'
 import { useNavigation } from '@react-navigation/native';
 import {useAuthContext} from '../../contexts/AuthContext'
@@ -20,7 +22,7 @@ const ProfileScreen = () => {
     }
 
     const AccountScreen = () => {
-        navigation.navigate("Mi Cuenta")
+        navigation.navigate("Account")
     }
     return (
         <View style={styles.page}>
@@ -34,7 +36,7 @@ const ProfileScreen = () => {
             <View style={styles.row}>
 
                 <View style={styles.tucarrito} >
-                    <MaterialCommunityIcons name="face-man-profile" size={50} color="black" onPress={AccountScreen} />
+                <AntDesign name="user" size={36} color="black" />
                 </View>
                 <Text onPress={AccountScreen}> Mi cuenta</Text>
             </View>
@@ -42,20 +44,20 @@ const ProfileScreen = () => {
             <View style={styles.row}>
 
                 <View style={styles.tucarrito}>
-                    <Entypo name="shopping-bag" size={50} color="black" />
+                <Feather name="shopping-bag" size={36} color="black" />
                 </View>
                 <Text> Mis pedidos </Text>
             </View>
             <View style={styles.row}>
 
                 <View style={styles.tucarrito}>
-                    <Entypo name="help" size={50} color="black" />
+                <Feather name="help-circle" size={36} color="black" />
                 </View>
                 <Text> Ayuda </Text>
             </View>
             <View style={styles.separator} />
 
-            <View style={styles.buttonContainer} >
+            <View style={styles.buttonContainer} onPress={SignOut}>
                 <Text style={styles.cerrar} onPress={SignOut}> Cerrar sesion</Text>
             </View>
         </View>
@@ -122,9 +124,9 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     perfil: {
-        marginTop: 10,
+        marginTop: 20,
         fontWeight: "400",
-        fontSize: 20
+        fontSize: 25
     },
     cerrar: {
         color: "red",
