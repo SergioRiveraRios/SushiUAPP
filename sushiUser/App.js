@@ -16,13 +16,13 @@ Amplify.configure({
 )
 
 function App() {
-  return (
+  return ( <AuthContextProvider>
     <NavigationContainer>
-      <AuthContextProvider>
+     
         <RootNavigator />
-      </AuthContextProvider>
+      
       <StatusBar style="auto" />
-    </NavigationContainer>
+    </NavigationContainer></AuthContextProvider>
   );
 }
 export default withAuthenticator(App)

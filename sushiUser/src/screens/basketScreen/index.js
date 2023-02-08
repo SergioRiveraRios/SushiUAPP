@@ -35,9 +35,10 @@ const BasketScreen = () => {
         getOrdenCarrito(currentUser?.cliente_Telefono)
     },[currentUser])
     const getOrdenCarrito= async(Usuario_Telefono)=>{
+        console.log(currentUser)
         db.transaction(tx => {
             // sending 4 arguments in executeSql
-            tx.executeSql(`SELECT *  FROM ordenCarrito INNER JOIN  menuItem On menuItem.idMenuItem=ordenCarrito.idMenuItem`, [],
+            tx.executeSql(`SELECT *  FROM ordenCarrito INNER JOIN  menuItem On menuItem.idMenuItem=ordenCarrito.idMenuItem INNER JOIN carrito ON carrito.idCarrito=ordenCarrito.idCarrito WHERE carrito.cliente_Telefono='${Usuario_Telefono}'`, [],
                 (txObj, result) => {
                     setcurrentBasket(result.rows._array),
                     console.log(currentBasket)
@@ -93,6 +94,7 @@ const styles = StyleSheet.create({
         paddingVertical: 30
     },
     title: {
+        marginTop:30,
         fontSize: 30,
         fontWeight: "600",
         justifyContent:"center",

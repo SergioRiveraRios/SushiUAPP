@@ -15,9 +15,9 @@ const ProfileScreen = () => {
     const [currentUser,setCurrentUser]=useState(null)
     useEffect(()=>{
         setCurrentUser(user[0])
-    })
+    },[user])
     const SignOut = () => {
-        console.log("usuario",currentUser)
+        console.log("usuario",user)
         console.log("nombre",currentUser?.cliente_Nombre)
     }
 
@@ -28,7 +28,7 @@ const ProfileScreen = () => {
         <View style={styles.page}>
             <Text style={styles.title}>Tu perfil</Text>
             <View style={styles.profileContainer}>
-                {perfiles.perfil && (<Image source={{ uri: perfiles.perfil }} style={styles.image} />)}
+                {currentUser.cliente_Imagen && (<Image source={{ uri: currentUser.cliente_Imagen }} style={styles.image} />)}
                 <Text style={styles.perfil}>{currentUser?.cliente_Nombre}</Text>
             </View>
 

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TextInput, SafeAreaView, Button, Alert } from "react-native"
+import { View, Text, StyleSheet, Image, TextInput, SafeAreaView, Button, Alert,Pressable } from "react-native"
 import React, { useEffect, useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { DataStore } from "@aws-amplify/datastore";
@@ -15,11 +15,13 @@ const LoginScreen = () => {
     const [Usuario_Correo, onChangeCorreo] = useState('');
     const db = SQLite.openDatabase('example.db')
 
-    
+
     const onSave = () => {
         newUser()
     };
-
+    const createUser=()=>{
+        navigation.navigate('NewAccount')
+    }
     const readTable = (Usuario_Correo, Usuario_Contrasena) => {
         db.transaction(tx => {
             // sending 4 arguments in executeSql
@@ -41,7 +43,6 @@ const LoginScreen = () => {
             } else {
                 user.map((nuevo, index) => {
                     console.log(nuevo)
-
                     navigation.navigate('Home');
                 })
             }
@@ -52,13 +53,13 @@ const LoginScreen = () => {
 
     return (
         <View style={styles.page}>
-            <Text style={styles.title}>Tu perfil</Text>
             <View style={styles.profileContainer}>
-                <Text style={styles.perfil}>Sergio Rivera Rios</Text>
+                <Image source={{ uri: 'https://images-uan.s3.us-east-2.amazonaws.com/imagenessushi/sushiuanlogo.png' }} style={styles.image} />
             </View>
             <View style={styles.separator} />
 
             <View>
+                <Text style={styles.title}>Inicia Sesion</Text>
                 <SafeAreaView>
                     <Text style={styles.inputText}>Tu Correo</Text>
                     <TextInput
@@ -74,7 +75,13 @@ const LoginScreen = () => {
                     />
 
                 </SafeAreaView>
-                <Button title="Guardar" onPress={onSave} />
+                <Pressable style={styles.button} onPress={onSave}>
+                    <Text style={styles.text}>Inicia Sesion</Text>
+                </Pressable>
+                <Text style={styles.o}>o</Text>
+                <Pressable style={styles.button} onPress={createUser}  >
+                    <Text style={styles.text} >Registrate</Text>
+                </Pressable>
             </View>
         </View>
     )
@@ -88,15 +95,20 @@ const styles = StyleSheet.create({
         width: "100%",
         paddingVertical: 30,
     },
-    profileContainer: {
-        flex: 1,
-        alignItems: "center",
-    },
     image: {
-        height: 150,
-        aspectRatio: 1,
-        marginBottom: 5,
-        borderRadius: 50
+        marginTop: 50,
+        width: "90%",
+        aspectRatio: 8 / 3,
+        marginBottom: 50,
+        alignContent: "center",
+        justifyContent: "center",
+        alignSelf: "center"
+    },
+    profileContainer: {
+
+        alignContent: "center",
+        justifyContent: "center",
+        alignSelf: "center"
     },
     separator: {
         height: 1,
@@ -119,7 +131,17 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignContent: "center",
         textAlign: "center",
-        marginBottom: 10
+        marginBottom: 10,
+        marginTop: 20
+    },
+    o: {
+        fontSize: 20,
+        fontWeight: "600",
+        justifyContent: "center",
+        alignContent: "center",
+        textAlign: "center",
+        marginBottom: 10,
+        marginTop: 10
     },
     input: {
         height: 40,
@@ -131,5 +153,24 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 12,
         fontSize: 15,
-    }
+    },
+    button: {
+        width:"50%",
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf:"center",
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: 'orange',
+        marginTop:10
+      },
+      text: {
+        fontSize: 16,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
+      }
 })

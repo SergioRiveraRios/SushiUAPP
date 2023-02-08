@@ -9,10 +9,9 @@ import SushiDetailScreen from '../screens/sushiDetailScreen'
 import SushiList from '../screens/sushiList'
 import ProfileScreen from '../screens/profileScreen';
 import AccountScreen from '../screens/AccountScreen'
-import { TabActions } from '@react-navigation/native'
-import { useAuthContext } from '../contexts/AuthContext';
-import { changeTitleushilistcreen } from '../components/RestaurantItem/index'
+import newUserAccount from '../screens/newUserScreen';
 import LoginScreen from '../screens/loginScreen'
+import DirectionScreen from '../screens/AddressScreen';
 const Stack = createNativeStackNavigator()
 const homeStack = createNativeStackNavigator()
 const ProfileStack = createNativeStackNavigator()
@@ -22,7 +21,9 @@ const RootNavigator = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }} >
             <Stack.Screen name ='Login' component={LoginScreen}/>
-            <Stack.Screen name ='Home' component={HomeTabs } screenOptions={{ headerShown: false }}options={{headerShown:false}}/>
+            <Stack.Screen name ='Home' component={HomeTabs}/>
+            <Stack.Screen name ='Maps' component={DirectionScreen}/>
+            <Stack.Screen name ='NewAccount' component={newUserAccount}/>
         </Stack.Navigator>
     )
 }
@@ -30,7 +31,7 @@ const HomeTabs = () => {
     return (
         <bottomTab.Navigator>
             <bottomTab.Screen name='Inicio' component={HomeStackNavigator} options={{ tabBarIcon: () => <AntDesign name="home" size={24} color="black" /> }} />
-            <bottomTab.Screen name='Carrito' component={BasketScreen} options={{ tabBarIcon: () => <AntDesign name="shoppingcart" size={24} color="black" /> }} />
+            <bottomTab.Screen name='Carrito' component={BasketScreen} options={{ headerTitle:"Tu carrito", tabBarIcon: () => <AntDesign name="shoppingcart" size={24} color="black" /> }} />
             <bottomTab.Screen name='Profile ' component={ProfileStackNavigator} options={{ tabBarIcon: () => <AntDesign name="profile" size={24} color="black" /> }} />
         </bottomTab.Navigator>
     )
@@ -45,7 +46,7 @@ const HomeStackNavigator = () => {
                 headerTitle: "Menu"
 
             }}></homeStack.Screen>
-            <homeStack.Screen name="BasketScreen" component={BasketScreen}></homeStack.Screen>
+            <homeStack.Screen name="BasketScreen" component={BasketScreen}  options={{headerTitle:"Tu Carrito"}}></homeStack.Screen>
         </homeStack.Navigator>
     )
 }
