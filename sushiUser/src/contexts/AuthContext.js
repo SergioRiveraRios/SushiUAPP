@@ -1,5 +1,4 @@
-import {  DataStore } from '@aws-amplify/datastore'
-import {Auth} from 'aws-amplify'
+
 import {createContext,useContext,useEffect,useState} from 'react'
 import { Usuario } from '../models'
 import {readTable,createTable,createCategoria,createMenuItem} from '../components/databaseQuery/index'

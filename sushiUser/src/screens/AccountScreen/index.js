@@ -1,20 +1,22 @@
-import { View, Text, StyleSheet, Image, TextInput, SafeAreaView, Button, Alert } from "react-native"
+import { View, Text, StyleSheet, Image, TextInput, SafeAreaView, Button, Alert,FlatList } from "react-native"
 import React, { useEffect, useState } from "react";
 import {useAuthContext} from '../../contexts/AuthContext'
 
-
+import BasketDishItem from '../../components/BasketDishItem'
 import * as SQLite from 'expo-sqlite';
-
+import AddressComponent from "../../components/AddressComponent";
 //import { useBasketContext } from "../../contexts/BasketContext";
 const AccountScreen = () => {
     const db = SQLite.openDatabase('example.db')
     const { setUsuario, user } = useAuthContext()
     const [currentUser,setCurrentUser]=useState(null)
+    const [direcciones,setDirecciones]=useState(null)
+    const [currentBasket,setcurrentBasket]=useState(null)
     useEffect(()=>{
         setCurrentUser(user[0])
+        setUser(user[0])
     },[user])
     const updateUser = (Usuario_Telefono, Usuario_Nombre, Usuario_Correo) => {
-        
         db.transaction(tx => {
             tx.executeSql(`UPDATE usuario 
                             SET cliente_Nombre='${Usuario_Nombre}', 
@@ -26,6 +28,25 @@ const AccountScreen = () => {
             )
         })
     
+    }
+    const setUser=(currentUser)=>{
+        onChangeNombre(currentUser?.cliente_Nombre+'')
+        onChangeTelefono(currentUser?.cliente_Telefono+'')
+        onChangeCorreo(currentUser?.cliente_correo+'')
+        getAddress(currentUser?.cliente_Telefono+'')
+    }
+    const getAddress= async(Usuario_Telefono)=>{
+        console.log(currentUser)
+        db.transaction(tx => {
+            // sending 4 arguments in executeSql
+            tx.executeSql(`SELECT * FROM direccion INNER JOIN usuario ON direccion.cliente_Telefono='${Usuario_Telefono}'`, [],
+                (txObj, result) => {
+                    setDirecciones(result.rows._array),
+                    console.log(result.rows._array)
+                },
+                (txObj, error) => console.log('Error ', error)
+            )
+        })
     }
     const [Usuario_Nombre, onChangeNombre] = useState(currentUser?.cliente_Nombre+'');
     const [Usuario_Telefono, onChangeTelefono] = useState(currentUser?.cliente_Telefono+'');
@@ -71,8 +92,9 @@ const AccountScreen = () => {
         <View style={styles.page}>
             <Text style={styles.title}>Tu perfil</Text>
             <View style={styles.profileContainer}>
-                <Text style={styles.perfil}>Sergio Rivera Rios</Text>
+                <Text style={styles.perfil}>{currentUser?.cliente_Telefono+''}</Text>
             </View>
+           
             <View style={styles.separator} />
 
             <View>
@@ -98,6 +120,7 @@ const AccountScreen = () => {
                         value={Usuario_Correo}
                     />
                 </SafeAreaView>
+                
                 <Button title="Guardar" onPress={onSave} />
                 <Button title="Eliminar Cuenta" onPress={onRead} style={styles.eliminarCuenta}/>
             </View>

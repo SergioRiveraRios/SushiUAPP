@@ -3,29 +3,20 @@ import { StyleSheet, Text, View, FlatList, useEffect } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native'
 import RootNavigator from './src/navigation';
-import { Amplify, Analytics } from 'aws-amplify'
-import config from '../sushiUser/src/aws-exports'
-import { withAuthenticator } from 'aws-amplify-react-native'
 import AuthContextProvider from './src/contexts/AuthContext';
-Amplify.configure({
-  ...config,
-  Analytics: {
-    disabled: true
-  }
-}
-)
+
 
 function App() {
-  return ( <AuthContextProvider>
+  return (
     <NavigationContainer>
-     
+      <AuthContextProvider>
         <RootNavigator />
-      
+      </AuthContextProvider>
       <StatusBar style="auto" />
-    </NavigationContainer></AuthContextProvider>
+    </NavigationContainer>
   );
 }
-export default withAuthenticator(App)
+export default App
 const styles = StyleSheet.create({
   container: {
     flex: 1,

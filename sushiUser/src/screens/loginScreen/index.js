@@ -1,8 +1,6 @@
 import { View, Text, StyleSheet, Image, TextInput, SafeAreaView, Button, Alert,Pressable } from "react-native"
 import React, { useEffect, useState } from "react";
 import { useNavigation } from '@react-navigation/native';
-import { DataStore } from "@aws-amplify/datastore";
-import { Usuario } from '../../models'
 import { useAuthContext } from '../../contexts/AuthContext'
 import * as SQLite from 'expo-sqlite';
 //import { readTable } from "../../components/databaseQuery";

@@ -1,21 +1,37 @@
 import { View, Text, StyleSheet, Image } from "react-native"
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import perfil from '../../../assets/data/dashboard/perfil.json'
 import { useNavigation } from '@react-navigation/native';
 import {useAuthContext} from '../../contexts/AuthContext'
 import { useEffect, useState } from "react";
-
+import { useRoute } from '@react-navigation/native';
+import * as SQLite from 'expo-sqlite';
 const perfiles = perfil[0]
 const ProfileScreen = () => {
+    const db = SQLite.openDatabase('example.db')
     const { setUsuario, user } = useAuthContext()
     const navigation = useNavigation()
     const [currentUser,setCurrentUser]=useState(null)
+    const route = useRoute()
+    const id = route.params?.id
     useEffect(()=>{
-        setCurrentUser(user[0])
-    },[user])
+        console.log(id)
+        if(id===undefined){
+            setCurrentUser(user[0])
+        }else{getCurrentUser()}
+            
+        
+    },[id])
+    const getCurrentUser=()=>{
+        db.transaction(tx => {
+            tx.executeSql(`SELECT * FROM usuario WHERE cliente_Telefono='${id}'`, null,
+                (txtObj, resulSet) => {
+                    setCurrentUser(resulSet.rows._array)
+                }
+            )
+        })
+    }
     const SignOut = () => {
         console.log("usuario",user)
         console.log("nombre",currentUser?.cliente_Nombre)
@@ -28,7 +44,7 @@ const ProfileScreen = () => {
         <View style={styles.page}>
             <Text style={styles.title}>Tu perfil</Text>
             <View style={styles.profileContainer}>
-                {currentUser.cliente_Imagen && (<Image source={{ uri: currentUser.cliente_Imagen }} style={styles.image} />)}
+                {currentUser?.cliente_Imagen && (<Image source={{ uri: currentUser?.cliente_Imagen }} style={styles.image} />)}
                 <Text style={styles.perfil}>{currentUser?.cliente_Nombre}</Text>
             </View>
 

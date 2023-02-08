@@ -5,10 +5,12 @@ import { Platform, Text, View, StyleSheet, Button, SafeAreaView, TextInput } fro
 import * as Location from 'expo-location';
 import * as SQLite from 'expo-sqlite';
 import { useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 const AddressScreen = () => {
     const db = SQLite.openDatabase('example.db')
     const route = useRoute()
     const id = route.params?.id
+    const navigation = useNavigation()
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
@@ -21,11 +23,12 @@ const AddressScreen = () => {
     useEffect(() => {
         getLocation()
         getCurrentUser()
-    }, [])
+    }, [id])
     const getCurrentUser=()=>{
         db.transaction(tx => {
             tx.executeSql(`SELECT * FROM usuario WHERE cliente_Telefono='${id}'`, null,
                 (txtObj, resulSet) => {
+                    console.log(resulSet.rows._array)
                     setCurrentUser(resulSet.rows._array)
                 }
             )
@@ -66,10 +69,11 @@ const AddressScreen = () => {
         let location = await Location.getCurrentPositionAsync({});
         let address = await Location.reverseGeocodeAsync(location.coords)
         db.transaction(tx => {
-            tx.executeSql(`INSERT INTO direccion (direccionCiudad,DireccionColonia,direccionCalle,DireccionNum,direccionCP,cliente_Telefono) VALUES ('${address[0].city}','${address[0].district}','${address[0].street}','${address[0].streetNumber}','${address[0].postalCode}','${currentUser[0]?.cliente_Telefono}')`, null,
+            tx.executeSql(`INSERT INTO direccion (direccionCiudad,direccionColonia,direccionCalle,direccionNum,direccionCP,cliente_Telefono) VALUES ('${address[0].city}','${address[0].district}','${address[0].street}','${address[0].streetNumber}','${address[0].postalCode}','${id}')`, null,
                 (txtObj, resulSet) => {
                     setCurrentUser(resulSet.rows._array)
                     console.log("insertado")
+                    navigation.navigate('Home',{id:id});
                 }
             )
         })
@@ -93,6 +97,7 @@ const AddressScreen = () => {
                     />
                 </SafeAreaView>
             </View>
+            <Button title='Direccion Actual' onPress={getLocation}></Button>
             <Button title='Guardar' onPress={insertAddressUser}></Button>
         </View>
     );

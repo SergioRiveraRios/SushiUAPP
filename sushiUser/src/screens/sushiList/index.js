@@ -12,8 +12,6 @@ import SushiDetailScreen from "../sushiDetailScreen";
 import SushiList from "./sushiList";
 import HeaderSushiList from './header'
 import { useEffect, useState } from 'react';
-import { DataStore } from 'aws-amplify';
-import { MenuItem } from '../../models';
 
 const sushiList = () => {
     

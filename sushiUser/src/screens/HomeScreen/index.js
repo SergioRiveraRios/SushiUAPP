@@ -1,8 +1,6 @@
 import { StyleSheet, FlatList, View, Text, Item, Button } from 'react-native';
 import RestaurantItem from '../../../src/components/RestaurantItem/index'
 import { useEffect, useState } from 'react';
-import { DataStore } from 'aws-amplify';
-import { Categoria } from '../../models';
 
 import { useRoute } from '@react-navigation/native';
 import { readTable } from "../../components/databaseQuery/index";

@@ -6,7 +6,6 @@ import { useNavigation } from "@react-navigation/native";
 
 
 import { useEffect, useState } from 'react';
-import { DataStore } from 'aws-amplify';
 
 const SushiList = ({ menuItem }) => {
     const navigation = useNavigation()

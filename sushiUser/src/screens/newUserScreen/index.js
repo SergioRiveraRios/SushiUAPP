@@ -43,7 +43,7 @@ const newUserAccount = () => {
     const createUser = (Usuario_Telefono, Usuario_Nombre, Usuario_Correo, Usuario_Pass,Usuario_Imagen) => {
         console.log("dd")
         db.transaction(tx => {
-            tx.executeSql(`INSERT INTO usuario (cliente_Telefono,cliente_Nombre,cliente_correo,cliente_contrasena,cliente_Imagen) VALUES ('${Usuario_Telefono + ''}','${Usuario_Nombre}','${Usuario_Correo}','${Usuario_Pass}','${Usuario_Imagen}')`, null,
+            tx.executeSql(`INSERT INTO usuario (cliente_Telefono,cliente_Nombre,cliente_correo,cliente_contrasena,cliente_Imagen) VALUES ('${Usuario_Telefono}','${Usuario_Nombre}','${Usuario_Correo}','${Usuario_Pass}','${Usuario_Imagen}')`, null,
                 (txtObj, resulSet) => {
                     console.log("insertado")
                 }
@@ -52,17 +52,25 @@ const newUserAccount = () => {
 
     }
 
-
+    const getCurrentUser=(Usuario_Telefono)=>{
+        db.transaction(tx => {
+            tx.executeSql(`SELECT * FROM usuario WHERE cliente_Telefono='${Usuario_Telefono}'`, null,
+                (txtObj, resulSet) => {
+                    console.log(resulSet.rows._array)
+                    setUsuario(resulSet.rows._array)
+                }
+            )
+        })
+    }
     const onSave = () => {
         db.transaction(tx => {
             tx.executeSql(`SELECT * FROM usuario WHERE cliente_Telefono='${Usuario_Telefono}'`, null,
                 (txtObj, resulSet) => {
                     setCurrentUser(resulSet.rows._array)
                     if (currentUser === undefined) {
-                        createUser(Usuario_Telefono + '', Usuario_Nombre, Usuario_Correo, Usuario_Pass,image)
+                        createUser(Usuario_Telefono, Usuario_Nombre, Usuario_Correo, Usuario_Pass,image)
                         Alert.alert("Exito!", "Usuario Creado")
-                        setCurrentUser(resulSet.rows._array)
-                        setUsuario(resulSet.rows._array)
+                        getCurrentUser(Usuario_Telefono)
                         navigation.navigate('Maps',{id:Usuario_Telefono});
                     } else {
                         currentUser.map((nuevo, index) => {

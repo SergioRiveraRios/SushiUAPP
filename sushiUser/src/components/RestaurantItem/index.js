@@ -4,8 +4,6 @@ import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import { restaurants } from '../../../assets/data/restaurants.json'
 import menu from '../../../assets/data/menu.json'
 import { useEffect, useState } from 'react';
-import { DataStore } from 'aws-amplify';
-import { MenuItem } from '../../models';
 import { useRoute } from '@react-navigation/native';
 
 import * as SQLite from 'expo-sqlite';

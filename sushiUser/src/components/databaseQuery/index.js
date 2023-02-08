@@ -166,7 +166,7 @@ export const readTable =  () => {
     let x = []
     db.transaction(tx => {
         // sending 4 arguments in executeSql
-        tx.executeSql('SELECT * FROM usuario  ', [],
+        tx.executeSql('SELECT * FROM usuario ', [],
             (txObj, result) => {
                 console.log('listo')
                 console.log(result.rows._array)
