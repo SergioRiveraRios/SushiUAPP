@@ -1,12 +1,11 @@
 
 import {createContext,useContext,useEffect,useState} from 'react'
-import { Usuario } from '../models'
 import {readTable,createTable,createCategoria,createMenuItem} from '../components/databaseQuery/index'
 const AuthContext =createContext({})
 const AuthContextProvider=({children})=>{
 
     const [authUser,setAuthUser]=useState(null)
-    const [dbUser,setdbUser]=useState(null)
+    const [adress,setAddress]=useState(null)
     const [user,setUsuario]=useState(null)
 
     
@@ -21,7 +20,7 @@ const AuthContextProvider=({children})=>{
     })
     
     return(
-        <AuthContext.Provider value={{user,setUsuario}}> 
+        <AuthContext.Provider value={{user,setUsuario,adress,setAddress}}> 
             {children}
         </AuthContext.Provider>
     )

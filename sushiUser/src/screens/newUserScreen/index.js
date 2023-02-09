@@ -7,7 +7,7 @@ import * as SQLite from 'expo-sqlite';
 import { Usuario } from "../../models";
 import { useRoute } from '@react-navigation/native';
 //import { useBasketContext } from "../../contexts/BasketContext";
-const newUserAccount = () => {
+const NewUserAccount = () => {
     const route = useRoute()
     const db = SQLite.openDatabase('example.db')
     const { setUsuario, user } = useAuthContext()
@@ -149,7 +149,7 @@ const newUserAccount = () => {
     )
 }
 
-export default newUserAccount
+export default NewUserAccount
 
 const styles = StyleSheet.create({
     page: {

@@ -11,7 +11,8 @@ const AddressScreen = () => {
     const route = useRoute()
     const id = route.params?.id
     const navigation = useNavigation()
-    const [location, setLocation] = useState(null);
+    const [locationMarker, setLocation] = useState(null);
+    const [newLocation,setNewLocation]=useState(null)
     const [errorMsg, setErrorMsg] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
     const [mapRegion, setmapRegion] = useState({
@@ -23,12 +24,12 @@ const AddressScreen = () => {
     useEffect(() => {
         getLocation()
         getCurrentUser()
+        console.log("marker",locationMarker)
     }, [id])
     const getCurrentUser=()=>{
         db.transaction(tx => {
             tx.executeSql(`SELECT * FROM usuario WHERE cliente_Telefono='${id}'`, null,
                 (txtObj, resulSet) => {
-                    console.log(resulSet.rows._array)
                     setCurrentUser(resulSet.rows._array)
                 }
             )
@@ -52,22 +53,27 @@ const AddressScreen = () => {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
         })
+        setNewLocation({
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+        })
         setLocation(address[0].city+", "+address[0].district+", "+address[0].street+" #"+address[0].streetNumber+", C.P."+address[0].postalCode)
         console.log(mapRegion)
-        console.log(address[0])
-        console.log(location)
     }
     const getUser=()=>{
         console.log(currentUser[0].cliente_Telefono)
     }
     
     const getMarkerLocation=async (newCoord)=>{
+        setNewLocation(newCoord)
         let address = await Location.reverseGeocodeAsync(newCoord)
         setLocation(address[0].city+", "+address[0].district+", "+address[0].street+" #"+address[0].streetNumber+", C.P."+address[0].postalCode)
+        console.log(locationMarker)
     }
     const insertAddressUser=async()=>{
-        let location = await Location.getCurrentPositionAsync({});
-        let address = await Location.reverseGeocodeAsync(location.coords)
+        let address = await Location.reverseGeocodeAsync(newLocation)
         db.transaction(tx => {
             tx.executeSql(`INSERT INTO direccion (direccionCiudad,direccionColonia,direccionCalle,direccionNum,direccionCP,cliente_Telefono) VALUES ('${address[0].city}','${address[0].district}','${address[0].street}','${address[0].streetNumber}','${address[0].postalCode}','${id}')`, null,
                 (txtObj, resulSet) => {
@@ -93,7 +99,7 @@ const AddressScreen = () => {
                         numberOfLines={4}
                         multiline={true}
                         onChangeText={setLocation}
-                        value={location}
+                        value={locationMarker}
                     />
                 </SafeAreaView>
             </View>

@@ -13,12 +13,15 @@ import SushiList from "./sushiList";
 import HeaderSushiList from './header'
 import { useEffect, useState } from 'react';
 
-const sushiList = () => {
+const SushiList2 = () => {
     
     const route = useRoute()
     const id = route.params?.id
     const navigation = useNavigation()
-    
+    const [menu,setMenu]=useState(null)
+    useEffect(()=>{
+        setMenu(id)
+    },[id])
     const onPress = () => {
         navigation.navigate("SushiDetailScreen", { id: id })
     }
@@ -26,11 +29,11 @@ const sushiList = () => {
     return (
         
         <Pressable style={styles.page} >
-            <FlatList ListHeaderComponent={HeaderSushiList} data={id}  renderItem={({ item }) => <SushiList menuItem={item} />} />
+            <FlatList ListHeaderComponent={HeaderSushiList} data={menu}  renderItem={({ item }) => <SushiList menuItem={item} />} />
         </Pressable>
     )
 }
-export default sushiList
+export default SushiList2
 
 const styles = StyleSheet.create({
     page: {

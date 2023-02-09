@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet, Image } from "react-native"
 import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import perfil from '../../../assets/data/dashboard/perfil.json'
 import { useNavigation } from '@react-navigation/native';
-import {useAuthContext} from '../../contexts/AuthContext'
+import { useAuthContext } from '../../contexts/AuthContext'
 import { useEffect, useState } from "react";
 import { useRoute } from '@react-navigation/native';
 import * as SQLite from 'expo-sqlite';
@@ -12,18 +13,18 @@ const ProfileScreen = () => {
     const db = SQLite.openDatabase('example.db')
     const { setUsuario, user } = useAuthContext()
     const navigation = useNavigation()
-    const [currentUser,setCurrentUser]=useState(null)
+    const [currentUser, setCurrentUser] = useState(null)
     const route = useRoute()
     const id = route.params?.id
-    useEffect(()=>{
+    useEffect(() => {
         console.log(id)
-        if(id===undefined){
+        if (id === undefined) {
             setCurrentUser(user[0])
-        }else{getCurrentUser()}
-            
-        
-    },[id])
-    const getCurrentUser=()=>{
+        } else { getCurrentUser() }
+
+
+    }, [user])
+    const getCurrentUser = () => {
         db.transaction(tx => {
             tx.executeSql(`SELECT * FROM usuario WHERE cliente_Telefono='${id}'`, null,
                 (txtObj, resulSet) => {
@@ -33,12 +34,18 @@ const ProfileScreen = () => {
         })
     }
     const SignOut = () => {
-        console.log("usuario",user)
-        console.log("nombre",currentUser?.cliente_Nombre)
+        console.log("usuario", user)
+        console.log("nombre", currentUser?.cliente_Nombre)
     }
 
     const AccountScreen = () => {
         navigation.navigate("Account")
+    }
+    const GetAddressScreen=()=>{
+        navigation.navigate("GetAddressScreen")
+    }
+    const OrdersScreen=()=>{
+        navigation.navigate("OrdersScreen")
     }
     return (
         <View style={styles.page}>
@@ -49,33 +56,43 @@ const ProfileScreen = () => {
             </View>
 
             <View style={styles.separator} />
+            <View style={styles.profileContainer2}>
             <View style={styles.row}>
 
                 <View style={styles.tucarrito} >
-                <AntDesign name="user" size={36} color="black" />
+                    <AntDesign name="user" size={36} color="black" />
                 </View>
                 <Text onPress={AccountScreen}> Mi cuenta</Text>
             </View>
-
             <View style={styles.row}>
 
-                <View style={styles.tucarrito}>
-                <Feather name="shopping-bag" size={36} color="black" />
+                <View style={styles.tucarrito} >
+                    <AntDesign name="book" size={36} color="black" />
                 </View>
-                <Text> Mis pedidos </Text>
+                <Text onPress={GetAddressScreen}> Mis Direcciones</Text>
             </View>
             <View style={styles.row}>
 
                 <View style={styles.tucarrito}>
-                <Feather name="help-circle" size={36} color="black" />
+                    <Feather name="shopping-bag" size={36} color="black" />
+                </View>
+                <Text onPress={OrdersScreen}> Mis pedidos </Text>
+            </View>
+            <View style={styles.row}>
+
+                <View style={styles.tucarrito}>
+                    <Feather name="help-circle" size={36} color="black" />
                 </View>
                 <Text> Ayuda </Text>
             </View>
+            </View>
             <View style={styles.separator} />
-
+            <View>
             <View style={styles.buttonContainer} onPress={SignOut}>
                 <Text style={styles.cerrar} onPress={SignOut}> Cerrar sesion</Text>
             </View>
+            </View>
+            
         </View>
 
     )
@@ -84,13 +101,13 @@ const ProfileScreen = () => {
 export default ProfileScreen
 const styles = StyleSheet.create({
     page: {
-        flex: 1,
+        flex:1,
         width: "100%",
-        paddingVertical: 30,
     },
     profileContainer: {
-        flex: 1,
         alignItems: "center",
+    },
+    profileContainer2: {
     },
     image: {
         height: 150,
@@ -101,7 +118,7 @@ const styles = StyleSheet.create({
     separator: {
         height: 1,
         backgroundColor: "#DCDCDC",
-        marginTop: 50
+        marginTop: 20
     },
     row: {
         flexDirection: "row",
@@ -137,10 +154,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignContent: "center",
         textAlign: "center",
-        marginBottom: 10
+        marginBottom: 10,
+        marginTop:10
     },
     perfil: {
-        marginTop: 20,
+        marginTop: 10,
         fontWeight: "400",
         fontSize: 25
     },
@@ -152,7 +170,6 @@ const styles = StyleSheet.create({
     buttonContainer: {
         padding: 20,
         alignItems: "center",
-
-        marginTop: "auto"
+        marginTop: "auto",
     },
 })

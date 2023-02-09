@@ -7,10 +7,10 @@ import * as SQLite from 'expo-sqlite';
 
 //import { useBasketContext } from "../../contexts/BasketContext";
 const LoginScreen = () => {
-    const { setUsuario, user } = useAuthContext()
+    const { setUsuario, user,adress, setAddress } = useAuthContext()
     const navigation = useNavigation()
-    const [Usuario_Contrasena, onChangeContrasena] = useState('');
-    const [Usuario_Correo, onChangeCorreo] = useState('');
+    const [Usuario_Contrasena, onChangeContrasena] = useState(null);
+    const [Usuario_Correo, onChangeCorreo] = useState(null);
     const db = SQLite.openDatabase('example.db')
 
 
@@ -32,7 +32,6 @@ const LoginScreen = () => {
             )
         })
     }
-
     const newUser = () => {
         try {
             readTable(Usuario_Correo, parseInt(Usuario_Contrasena))

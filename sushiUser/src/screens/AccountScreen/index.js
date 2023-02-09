@@ -1,7 +1,8 @@
-import { View, Text, StyleSheet, Image, TextInput, SafeAreaView, Button, Alert,FlatList } from "react-native"
+import { View, Text, StyleSheet, Image, TextInput, SafeAreaView, Button, Alert, Pressable } from "react-native"
 import React, { useEffect, useState } from "react";
-import {useAuthContext} from '../../contexts/AuthContext'
+import { useAuthContext } from '../../contexts/AuthContext'
 
+import * as ImagePicker from 'expo-image-picker';
 import BasketDishItem from '../../components/BasketDishItem'
 import * as SQLite from 'expo-sqlite';
 import AddressComponent from "../../components/AddressComponent";
@@ -9,55 +10,90 @@ import AddressComponent from "../../components/AddressComponent";
 const AccountScreen = () => {
     const db = SQLite.openDatabase('example.db')
     const { setUsuario, user } = useAuthContext()
-    const [currentUser,setCurrentUser]=useState(null)
-    const [direcciones,setDirecciones]=useState(null)
-    const [currentBasket,setcurrentBasket]=useState(null)
-    useEffect(()=>{
+    const [currentUser, setCurrentUser] = useState(null)
+    const [updatedUser, setUpdatedUser] = useState(null)
+    const [direcciones, setDirecciones] = useState(null)
+    const [image, setImage] = useState(null);
+    const [currentImage, setCurrentImage] = useState(null);
+    useEffect(() => {
         setCurrentUser(user[0])
         setUser(user[0])
-    },[user])
+        getAddress(user[0].cliente_Telefono)
+        setImage(user[0].cliente_Imagen)
+    }, [user])
+
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (permissionResult.granted === false) {
+            alert("You've refused to allow this appp to access your photos!");
+            return;
+          }
+        console.log("entre")
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        console.log(result.assets[0].uri);
+        
+        if (!result.canceled) {
+          setImage(result.assets[0].uri);
+        }
+      };
     const updateUser = (Usuario_Telefono, Usuario_Nombre, Usuario_Correo) => {
+        console.log(Usuario_Telefono)
         db.transaction(tx => {
             tx.executeSql(`UPDATE usuario 
                             SET cliente_Nombre='${Usuario_Nombre}', 
                             cliente_correo ='${Usuario_Correo}',
+                            cliente_Imagen ='${image}'
                             WHERE cliente_Telefono='${Usuario_Telefono}'`, null,
                 (txtObj, resulSet) => {
-                    console.log("actualizado")
+                    getCurrentUser(Usuario_Telefono)
                 }
             )
         })
-    
+
     }
-    const setUser=(currentUser)=>{
-        onChangeNombre(currentUser?.cliente_Nombre+'')
-        onChangeTelefono(currentUser?.cliente_Telefono+'')
-        onChangeCorreo(currentUser?.cliente_correo+'')
-        getAddress(currentUser?.cliente_Telefono+'')
+    const getCurrentUser=(Usuario_Telefono)=>{
+        db.transaction(tx => {
+            tx.executeSql(`SELECT * FROM usuario
+                            WHERE cliente_Telefono='${Usuario_Telefono}'`, null,
+                (txtObj, resulSet) => {
+                    console.log("encontrado",resulSet.rows._array)
+                    setUsuario(resulSet.rows._array)
+                }
+            )
+        })
     }
-    const getAddress= async(Usuario_Telefono)=>{
+    const setUser = (currentUser) => {
+        onChangeNombre(currentUser?.cliente_Nombre + '')
+        onChangeTelefono(currentUser?.cliente_Telefono + '')
+        onChangeCorreo(currentUser?.cliente_correo + '')
+        getAddress(currentUser?.cliente_Telefono + '')
+    }
+    const getAddress = async (Usuario_Telefono) => {
         console.log(currentUser)
         db.transaction(tx => {
             // sending 4 arguments in executeSql
             tx.executeSql(`SELECT * FROM direccion INNER JOIN usuario ON direccion.cliente_Telefono='${Usuario_Telefono}'`, [],
                 (txObj, result) => {
-                    setDirecciones(result.rows._array),
-                    console.log(result.rows._array)
+                    setDirecciones(result.rows._array)
                 },
                 (txObj, error) => console.log('Error ', error)
             )
         })
     }
-    const [Usuario_Nombre, onChangeNombre] = useState(currentUser?.cliente_Nombre+'');
-    const [Usuario_Telefono, onChangeTelefono] = useState(currentUser?.cliente_Telefono+'');
-    const [Usuario_Correo, onChangeCorreo] = useState(currentUser?.cliente_Correo+'' );
+    const [Usuario_Nombre, onChangeNombre] = useState(currentUser?.cliente_Nombre + '');
+    const [Usuario_Telefono, onChangeTelefono] = useState(currentUser?.cliente_Telefono + '');
+    const [Usuario_Correo, onChangeCorreo] = useState(currentUser?.cliente_Correo + '');
 
-    const onRead = () => {
-        console.log("usuario",currentUser)
-        console.log("nombre",currentUser?.cliente_Nombre)
-    }
     const onSave = () => {
-        updateUser(currentUser?.Usuario_Telefono, currentUser?.Usuario_Nombre,currentUser?.Usuario_Correo)
+        //getCurrentUser(currentUser?.cliente_Telefono)
+        updateUser(currentUser?.cliente_Telefono, Usuario_Nombre, Usuario_Correo)
     };
 
     /*const updateUser = async (id) => {
@@ -74,27 +110,15 @@ const AccountScreen = () => {
             setdbUser(nuevo)
         console.log("2")
     }*/
-    const newUser = () => {
-        try {
-            console.log("entre2")
-            //createCarrito(Usuario_Telefono)
-            //const user = await DataStore.save(new Usuario({ Usuario_Nombre, Usuario_Telefono, Usuario_Correo, sub, untitledfield: 's' }))
-            //setdbUser(user)
-            //setUsuario(user)
-            //console.log("Usuario", user)
-            //const basket2 = await DataStore.save(new Carrito({ usuarioID: user.id }))
-            //setBasket(basket2)
-        }
-        catch (e) { Alert.alert("error", e.message) }
-    }
 
     return (
         <View style={styles.page}>
             <Text style={styles.title}>Tu perfil</Text>
+            {image && (<Image source={{ uri: image }} style={styles.image} />)}
+            <Button title="Selecciona tu foto de perfil" onPress={pickImage} style={styles.botonPerfil}/>
             <View style={styles.profileContainer}>
-                <Text style={styles.perfil}>{currentUser?.cliente_Telefono+''}</Text>
             </View>
-           
+
             <View style={styles.separator} />
 
             <View>
@@ -120,10 +144,16 @@ const AccountScreen = () => {
                         value={Usuario_Correo}
                     />
                 </SafeAreaView>
-                
-                <Button title="Guardar" onPress={onSave} />
-                <Button title="Eliminar Cuenta" onPress={onRead} style={styles.eliminarCuenta}/>
+
             </View>
+            <Pressable style={styles.button}  onPress={onSave}>
+                <Text style={styles.text} >Guardar Cambios</Text>
+            </Pressable>
+            <Pressable style={styles.button2}  onPress={onSave}>
+                <Text style={styles.cerrar} >Eliminar Cuenta</Text>
+            </Pressable>
+
+
         </View>
     )
 }
@@ -144,7 +174,8 @@ const styles = StyleSheet.create({
         height: 150,
         aspectRatio: 1,
         marginBottom: 5,
-        borderRadius: 50
+        borderRadius: 50,
+        alignSelf: "center"
     },
     separator: {
         height: 1,
@@ -167,6 +198,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignContent: "center",
         textAlign: "center",
+        alignSelf: "center",
         marginBottom: 10
     },
     input: {
@@ -180,7 +212,35 @@ const styles = StyleSheet.create({
         marginLeft: 12,
         fontSize: 15,
     },
-    eliminarCuenta:{
-        backgroundColor:"red"
-    }
+    eliminarCuenta: {
+        backgroundColor: "red"
+    },
+    button: {
+        width:"50%",
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf:"center",
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: 'orange',
+        marginBottom:20
+      },
+      button2: {
+        alignItems: "center",
+      }
+      ,text: {
+        fontSize: 16,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
+      },
+      cerrar: {
+        
+        color: "red",
+        fontWeight: "400",
+        fontSize: 20
+    },
 })
